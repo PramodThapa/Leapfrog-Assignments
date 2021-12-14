@@ -1,0 +1,420 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600&family=Open+Sans+Condensed:ital,wght@0,300;1,300&display=swap');
+
+/* fonts*/
+.f-left{
+    float: left;
+}
+
+.f-right{
+    float: right;
+}
+.font-large {
+    font-size: 18px;
+}
+  
+.font-heading {
+    font-size: 24px;
+}
+  
+.font-body {
+    font-size: 16px;
+}
+  
+.font-medium {
+    font-size: 14px;
+}
+  
+.font-small {
+    font-size: 12px;
+}
+  
+.font-x-small {
+    font-size: 10px;
+}
+
+/* font-weight*/
+.f-weight{
+    font-weight: 700;
+}
+  
+/* design*/
+.verticle-bar:before{
+    content:'|';    
+}
+
+/* colors*/
+.bg-primary-header{
+    background-color: #2FC1DA;
+}
+.bg-primary-footer {
+    background-color: #727272;
+}
+.detail-primary-color{
+    color: #2fc1da ;
+}
+
+.secondary-text-color{
+    color: #6f971d;
+}
+
+.tertiary-text-color{
+   color:#d43f1e
+}
+
+
+.wrapper{
+    min-width: 1002px;
+    background-color: #FFFFFF;
+}  
+
+/* header css*/
+.header{
+    background-color: #7DD9E8;
+}
+.container{
+    height: 85px;
+    width: 938px;
+    margin: 0px auto;
+}
+
+.header-left{
+    float: left;
+    height: 85px;
+}
+
+.logo{
+   height: 85px;
+   overflow: hidden;
+}
+
+/*Search-Box*/
+.search-bar {
+    margin-top: 35px;
+    margin-left: 29px;
+}
+  
+.search-border {
+    margin-top: 2px;
+}
+  
+input {
+    width: 237px;
+    height: 20px;
+    background-color: #caeff7;
+    border: none;
+}
+  
+.cross-button {
+    width: 12px;
+    height: 20px;
+    background: url(../img/icon/cancel.png) no-repeat;
+    margin-top: 2px;
+    border: none;
+}
+.search-icon {
+    width: 32px;
+    height: 20px;
+    background: url(/img/icon/search.png) no-repeat;
+    margin-top: 2px;
+    margin-left: 1px;
+    border: none;
+}
+  
+.search-button {
+    background: url(/img/search-buttom.png) no-repeat;
+    width: 53px;
+    height: 20px;
+    border: none;
+    color: #ffffff;
+  }
+/*user-info*/
+.user-info{
+ text-align: right;
+ margin-top: 26px;
+}
+
+.user-info  ul li{
+    display: inline;
+    text-align: center;
+}
+.m-r{
+    margin-right: 6px;
+}
+
+/* nav-bar*/
+.nav{
+    font-family:'Mulish';
+    height: 44px;
+    background-color: #F5F5F5;
+}
+
+.nav-container{
+    height: 40px;
+    width: 938px;
+    margin: 0px auto;
+}
+
+.nav-left{
+    float: left;
+}
+.nav-right{
+    float: right;
+   
+}
+
+.nav-left ul{
+    margin-left:8px;
+    padding: 12px 0px 12px 0px;
+}
+
+.nav-left ul li{
+    display: inline;
+    margin-right: 31px;
+}
+
+.nav-right ul li{
+    list-style: none;
+    display: inline;
+}
+.icon-margin{
+    margin-left: 8px;
+}
+.icon-text{
+    padding: 12px 0px 12px 0px;
+}
+
+.icon-two{
+    margin-right: 32px;
+}
+
+
+
+
+
+/* main content starts here*/
+
+.main-content{
+    position: relative;
+    top: 26px;
+}
+
+.content-wrapper{
+    width: 938px;
+    margin: 0 auto;
+}
+
+/* left side bar*/
+.content-left{
+    float: left;
+    
+}
+
+.content-left-list {
+    font-size: 12px;
+    list-style-type: none;
+}
+
+.content-left-list a{
+    padding: 12px 10px 12px 10px;
+    display: block;
+    font-weight: 600;
+}
+.content-left-heading {
+    color: #ffffff;
+    padding: 12px 12px 14px 12px;
+    font-size: 16px;
+}
+.content-left-list li:hover {
+    background-color: #ffffff;
+}
+
+.content-left-list a:hover{
+    text-decoration: none;
+}
+
+.recent-content{
+    float: left;
+    width: 194px;
+    height: 626px;
+    background-color: #F5F5F5;
+}
+
+
+/* right content*/
+.content-right{
+    float: right;
+    width: 176px;
+    height: 626px;
+    background-color: #F5F5F5;
+}
+.content-right-heading{
+    color: #ffffff;
+    padding: 12px 12px 14px 12px;
+    font-size: 16px;
+}
+
+.content-right-list a{
+    padding: 12px 10px 12px 10px;
+    display: block;
+    font-weight: 600;
+    
+}
+
+.content-right-list li:hover{
+    background-color: #ffffff;
+}
+
+.content-right-list a:hover{
+    text-decoration: none;
+}
+
+.content-right ul{
+    list-style: none;
+}
+
+
+/* entries*/
+
+.entries{
+    float: right;
+    margin-left: 26px;
+    width: 518px;
+    
+}
+
+
+.entries-nav{
+    border-bottom: 2px solid #2FC1DA;
+}
+.entries-header{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.subscribed{
+    float: right;
+    width: 258px;
+    background-color:#F5F5F5 ;
+    height: 68px;
+}
+.subscribed-header{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+.all-entries{
+    height: 68px;
+    float: left;
+    width: 258px;
+    background-color:#F5F5F5 ;
+}
+
+.nav-box-left{
+   background-color: #2FC1DA;
+   float: left;
+   height: 30px;
+   width:114px;
+   position: relative;
+   left: 10px;
+   text-align: center;
+   
+}
+.nav-box-right{
+    background-color: #DDDDDD;
+    float: right;
+    height: 30px;
+    width:114px;
+    text-align: center;
+    margin-right:10px ;
+}
+
+.subscribed:before{
+    content: '';
+    display: block;
+    width:258px;
+    height:10px;
+    background-image: url(../img/subscribed-border.png);
+}
+.all-entries:before{
+    content: '';
+    display: block;
+    width:258px;
+    height:10px;
+    background-image: url(../img/all-entries-border.png);
+}
+.nav-box-right:before{
+    content: '';
+    display: block;
+    width:-258px;
+    height:10px;
+    background-image: url(../img/nav-border.png);
+}
+
+.nav-box-left:before{
+    content: '';
+    display: block;
+    width:114px;
+    height:10px;
+    background-image: url(../img/all-member-border.png);
+    
+}
+
+/* main content entries*/
+.entries-content{
+   overflow: hidden;
+   padding: 15px 0px 15px 0px;
+   border-bottom: 1px solid #D8D8D8;
+   height: 101px;
+}
+.avatar{
+    margin-right: 9px;
+}
+
+/* Footer*/
+.footer-list {
+    padding: 18px 0;
+}
+
+.footer-list ul li {
+    display: inline;
+}
+.footer-nav a {
+    color: #d5d5d5;
+}
+.circle:before {
+    content: "•";
+    padding: 7px;
+    color: #d5d5d5;
+}
+
+.copyright {
+    color: #d5d5d5;
+    padding: 18px 0;
+}
+.footer-container {
+    width: 938px;
+    min-width: 938px;
+    margin: auto;
+    height: 45px;
+    margin-top: 32px;
+}
+  
+
+
+.m-l{
+    margin-right: 2px;
+}
+a{
+    text-decoration: none;
+    color: #000000;
+}
+a:hover{
+    text-decoration: underline;
+}
+.clearfix::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+

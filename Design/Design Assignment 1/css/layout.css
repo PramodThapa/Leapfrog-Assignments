@@ -1,0 +1,33 @@
+.wrapper{
+    min-width: 1002px;
+}
+
+.container{
+    height: 85px;
+    width: 938px;
+}
+
+.nav-container{
+    height: 40px;
+    width: 938px
+}
+
+.content-wrapper{
+   width: 938px;
+
+}
+
+.content-left-wrapper{
+    width: 194px;
+    height: 626px;
+}
+
+.content-right-wrapper{
+    width: 176px;
+    height: 626px;
+}
+
+.content-middle-wrapper{
+    width: 762px;
+    height: 600px;
+}
