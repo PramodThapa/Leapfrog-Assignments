@@ -1,6 +1,7 @@
+/*Google Font Import*/
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600&family=Open+Sans+Condensed:ital,wght@0,300;1,300&display=swap');
 
-/* fonts*/
+/* fonts */
 .f-left{
     float: left;
 }
@@ -33,14 +34,17 @@
 }
 
 /* font-weight*/
+
 .f-weight{
     font-weight: 700;
 }
-  
+
+
 /* design*/
 .verticle-bar:before{
     content:'|';    
 }
+
 
 /* colors*/
 .bg-primary-header{
@@ -62,12 +66,13 @@
 }
 
 
+/* Document wrapper */
 .wrapper{
     min-width: 1002px;
     background-color: #FFFFFF;
 }  
 
-/* header css*/
+/* header css */
 .header{
     background-color: #7DD9E8;
 }
@@ -87,10 +92,10 @@
    overflow: hidden;
 }
 
-/*Search-Box*/
+/* Search-Box */
 .search-bar {
     margin-top: 35px;
-    margin-left: 29px;
+    margin-left: 28px;
 }
   
 .search-border {
@@ -98,17 +103,19 @@
 }
   
 input {
-    width: 237px;
+    width: 238px;
     height: 20px;
     background-color: #caeff7;
     border: none;
+    outline: none;
 }
   
-.cross-button {
+.cancel-button {
     width: 12px;
     height: 20px;
     background: url(../img/icon/cancel.png) no-repeat;
     margin-top: 2px;
+    margin-left: -10px;
     border: none;
 }
 .search-icon {
@@ -126,7 +133,12 @@ input {
     height: 20px;
     border: none;
     color: #ffffff;
-  }
+}
+
+.search-button:hover{
+    cursor: pointer;
+}
+
 /*user-info*/
 .user-info{
  text-align: right;
@@ -141,7 +153,7 @@ input {
     margin-right: 6px;
 }
 
-/* nav-bar*/
+/* nav-bar */
 .nav{
     font-family:'Mulish';
     height: 44px;
@@ -157,6 +169,7 @@ input {
 .nav-left{
     float: left;
 }
+
 .nav-right{
     float: right;
    
@@ -186,10 +199,6 @@ input {
 .icon-two{
     margin-right: 32px;
 }
-
-
-
-
 
 /* main content starts here*/
 
@@ -282,7 +291,6 @@ input {
     
 }
 
-
 .entries-nav{
     border-bottom: 2px solid #2FC1DA;
 }
@@ -312,7 +320,7 @@ input {
 .nav-box-left{
    background-color: #2FC1DA;
    float: left;
-   height: 30px;
+   height: 31px;
    width:114px;
    position: relative;
    left: 10px;
@@ -398,8 +406,6 @@ input {
     height: 45px;
     margin-top: 32px;
 }
-  
-
 
 .m-l{
     margin-right: 2px;
