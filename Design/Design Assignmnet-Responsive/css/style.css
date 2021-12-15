@@ -1,0 +1,434 @@
+/*GOOLE FONT IMPORT*/
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600&family=Open+Sans+Condensed:ital,wght@0,300;1,300&display=swap');
+
+
+/*----- FONTS------- */
+
+.f-left{
+    float: left;
+}
+
+.f-right{
+    float: right;
+}
+.font-large {
+    font-size: 18px;
+}
+  
+.font-heading {
+    font-size: 24px;
+}
+  
+.font-body {
+    font-size: 16px;
+}
+  
+.font-medium {
+    font-size: 14px;
+}
+  
+.font-small {
+    font-size: 12px;
+}
+  
+.font-x-small {
+    font-size: 10px;
+}
+
+/*---- FONT-WEIGHT------*/
+
+.f-weight{
+    font-weight: 700;
+}
+
+/*------ DESIGN--------- */
+
+.verticle-bar:before{
+    content:'|';    
+}
+
+.circle:before {
+    content: "•";
+    padding: 7px;
+    color: #d5d5d5;
+}
+
+/*------- COLORS ---------*/
+.bg-primary-header{
+    background-color: #2FC1DA;
+}
+.bg-primary-footer {
+    background-color: #727272;
+}
+.detail-primary-color{
+    color: #2fc1da ;
+}
+
+.secondary-text-color{
+    color: #6f971d;
+}
+
+.tertiary-text-color{
+   color:#d43f1e
+}
+
+/*------- DOCUMENT WRAPPER ------*/
+
+.wrapper{
+    width: 100%;
+    background-color: #FFFFFF;    
+}  
+
+/*----- HEADER CSS -------*/
+
+.header{
+    width: 100%;
+    background-color: #7DD9E8;
+    
+}
+.header-left{
+    float: left;
+    height: 85px;
+}
+
+.logo{
+   height: 85px;
+   overflow: hidden;
+}
+.mobile-responsive-logo{
+    text-align: center;
+}
+.mobile-responsive-search-bar{
+    margin: 0px auto;
+}
+
+/*--------- SEARCH-BOX --------*/
+.search-bar {
+    margin-top: 35px;
+    margin-left: 28px;
+}
+  
+.search-border {
+    margin-top: 2px;
+}
+  
+input {
+    width: 238px;
+    height: 20px;
+    background-color: #caeff7;
+    border: none;
+    outline: none;
+}
+  
+.cancel-button {
+    width: 12px;
+    height: 20px;
+    background: url(../img/icon/cancel.png) no-repeat;
+    margin-top: 2px;
+    margin-left: -10px;
+    border: none;
+}
+.search-icon {
+    width: 32px;
+    height: 20px;
+    background: url(../img/icon/search.png) no-repeat;
+    margin-top: 2px;
+    margin-left: 1px;
+    border: none;
+}
+  
+.search-button {
+    background: url(../img/search-buttom.png) no-repeat;
+    width: 53px;
+    height: 20px;
+    border: none;
+    color: #ffffff;
+}
+
+.search-button:hover{
+    cursor: pointer;
+}
+
+/*--------USER-INFO ---------*/
+
+.user-info{
+ text-align: right;
+ margin-top: 26px;
+}
+
+.user-info  ul li{
+    display: inline;
+    text-align: center;
+}
+.m-r{
+    margin-right: 6px;
+}
+
+/*------ NAV-BAR ----------*/
+
+.nav{
+    font-family:'Mulish';
+    height: 44px;
+    background-color: #F5F5F5;
+}
+
+.nav-container{
+    margin: 0px auto;
+}
+
+.nav-left{
+    float: left;
+}
+
+.nav-right{
+    float: right;   
+}
+
+.nav-right ul li{
+    list-style: none;
+    display: inline;
+}
+.icon-margin{
+    margin-left: 8px;
+}
+.icon-text{
+    padding: 12px 0px 12px 0px;
+}
+
+/*------ MOBILE-NAV -----------*/
+
+.mobile-nav{
+    width: 100%;
+    background-color: #F5F5F5;
+}
+
+.nav-container{
+    margin:0px auto;    
+}
+
+.nav-container ul{
+    margin: 14px 0px 0px 10px;
+}
+
+.nav-container ul li{
+    display: inline;
+    padding:5px 10px 5px 10px;
+}
+
+.expand-icon{
+    margin:10px 5px 0px 10px;
+}
+
+.icon-one{
+    margin: 0 2px 0px 20px;
+}
+
+/*-------- SIDEBAR MOBILE ---------*/
+
+.collapse-content-left{
+    height:40px;
+    background-color:#F5F5F5;
+    width:100%
+}
+
+.collapse-content-left:hover{
+    background-color: #ffffff;
+}
+
+.left-heading span{
+    display: block;
+    padding-top: 10px;
+}
+.right-heading span{
+    display: block;
+    padding-top: 10px;
+}
+
+.collapse-content-right{
+    height:40px;
+    background-color:#F5F5F5;
+    width:100%
+}
+.collapse-content-right:hover{
+    background-color: #ffffff;
+}
+.right-heading{
+    display: block;
+    padding-top:10px;
+}
+.icon-expand{
+    padding-top:5px;
+}
+
+/*-------- MAIN CONTENT STARTS HERE-------*/
+
+.content-wrapper{
+    width: 100%;
+}
+
+/*-------- LEFT SIDE BAR----------*/
+
+.content-left-list {
+    font-size: 12px;
+    list-style-type: none;
+}
+
+.content-left-list a{
+    padding: 12px 10px 12px 10px;
+    display: block;
+    font-weight: 600;
+}
+.content-left-heading {
+    color: #ffffff;
+    padding: 12px 12px 14px 12px;
+    font-size: 16px;
+}
+.content-left-list li:hover {
+    background-color: #ffffff;
+}
+
+.content-left-list a:hover{
+    text-decoration: none;
+}
+
+.recent-content{
+    background-color: #F5F5F5;
+}
+
+/*-------RIGHT CONTENT------*/
+
+.content-right{
+    float: right;
+    background-color: #F5F5F5;
+}
+.content-right-heading{
+    color: #ffffff;
+    padding: 12px 12px 14px 12px;
+    font-size: 16px;
+}
+
+.content-right-list a{
+    padding: 12px 10px 12px 10px;
+    display: block;
+    font-weight: 600;    
+}
+
+.content-right-list li:hover{
+    background-color: #ffffff;
+}
+
+.content-right-list a:hover{
+    text-decoration: none;
+}
+
+.content-right ul{
+    list-style: none;
+}
+
+/*--------- ENTRIES-------------*/
+
+.entries{
+    padding:2px;
+    width: 100%;
+    
+}
+
+.entries-nav{
+    border-bottom: 2px solid #2FC1DA;
+    height:100%;
+}
+.entries-header{
+    text-align: center;
+    padding: 2px 0px 2px 0px;
+}
+.subscribed{
+    float: right;
+    width: 49%;
+    background-color:#F5F5F5 ;
+    height: 58px;
+}
+
+.subscribed-header{
+    text-align: center;
+    padding: 2px 0px 2px 0px;
+}
+
+.all-entries{
+    height: 58px;
+    float: left;
+    width: 49%;
+    text-align: center;
+    background-color:#F5F5F5 ;
+}
+
+.nav-box{
+    margin:0 4px 0 4px;
+}
+
+.nav-box-left{
+   background-color: #2FC1DA;
+   float: left;
+   height: 36px;
+   width:42%;
+   text-align: center;
+   padding-top: 5px;   
+}
+
+.nav-box-right{
+    background-color: #DDDDDD;
+    height: 36px;
+    width:42%;
+    text-align: center;
+    padding-top: 5px;
+}
+
+/*------- MAIN CONTENT ENTRIES------*/
+.entries-content{
+   overflow: hidden;
+   padding: 15px 0px 15px 0px;
+   border-bottom: 1px solid #D8D8D8;
+   height: 101px;
+}
+
+.avatar{
+    margin-right: 9px;
+}
+
+/*----------FOOTER------------------*/
+.footer-list {
+    padding: 18px 0;
+}
+
+.footer-list ul li {
+    display: inline;
+}
+.footer-nav a {
+    color: #d5d5d5;
+}
+
+
+.copyright {
+    color: #d5d5d5;
+    padding: 18px 0;
+}
+.footer-container {
+    width: 92%;
+    margin:0px auto;
+}
+
+.m-l{
+    margin-right: 2px;
+}
+a{
+    text-decoration: none;
+    color: #000000;
+}
+a:hover{
+    text-decoration: underline;
+}
+.clearfix::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+

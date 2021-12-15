@@ -1,0 +1,30 @@
+.wrapper{
+    width: 100%;
+}
+
+.header{
+    width: 100%;
+}
+
+.mobile-nav{
+    width: 100%;
+}
+
+.nav-container{
+    margin:0px auto;    
+}
+
+.collapse-content-left{
+    height:40px;
+    width:100%
+}
+
+.collapse-content-right{
+    height:40px;
+    width:100%
+}
+
+.content-wrapper{
+    width: 100%;
+}
+
