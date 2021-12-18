@@ -1,0 +1,318 @@
+/*---------MEDIA QUERIES----------*/
+@media only screen and (min-width:440px){
+    .hero-content{
+        top:30%;
+    }
+    .tablet-nav{
+        display: block;
+    }
+    .hamburger-menu{
+        display: none;
+    }
+    .logo-container{
+        margin-top: 5px;
+        width: 50%;
+        position: relative;
+        top: 0px;
+        left:0px;
+    }
+    .sobrenos-hero-content span{
+        line-height: 24px;
+    }
+}
+
+@media only screen and (min-width:464px){
+    .hero-footer{
+        padding: 0px 0px 0px 2px;
+    }
+    .item-hero-footer{
+        width: 50%;
+    }
+    .autacao-content{
+        margin-left: 18%;
+    }
+    .sobrenos-hero-content{
+        top:25%;
+    }
+}
+
+@media only screen and (min-width:516px){
+    .mobile-nav{
+        display: none;
+    }
+    .member-login{
+        display: none;
+    }
+    .hamburger-menu{
+        display: none;
+    }
+    .login-menu{
+        display: none;
+    }
+    .logo-container{
+        margin-top: 15px;
+        clear: both;
+    }
+    .new-member{
+        display: block;
+    }
+    .comment-text{
+        text-align: center;
+    }
+    .servicos-item{
+        width: 50%;
+        padding-left: 10px;
+    }
+    .sobrenos-hero-content{
+        top: 30%;
+    }
+    .autacao-content{
+        margin-left: 0px;
+    }
+    .item-hero-footer{
+        margin-top:25px;
+    }
+}
+
+@media only screen and (min-width:600px) {
+    .autacao-content{
+        margin-left:5%;
+    }
+    
+}
+
+@media only screen and (min-width:680px) {
+    .sobrenos-hero-image{
+        position: relative;
+        float: left;
+        width: 50%;
+    }
+    .sobrenos-hero-image img{
+        width: 100%;
+        opacity: 100%;
+    }
+    .sobrenos-hero-content{
+        position: relative;
+        width: 50%;
+        float: right;
+        margin-top: 6%;
+    }
+    .planos-content{
+        width:50%;
+    }
+    
+}
+
+@media only screen and (min-width:750px){
+    .footer-content-header{
+        width:20%;
+        float: left;
+        text-align: left;
+    }
+    .email-field svg{
+        right: 25%;
+    }
+    .footer-content-wrapper{
+        width: 92%;
+        margin: 0px auto;
+    }
+    .autacao-content{
+        margin-left:10%;
+    }
+
+}
+
+
+@media only screen and (min-width:880px){
+    .hero-image{
+        position: relative;
+        float: right;
+        width: 349px;
+    }
+    .hero-image img{
+     width: inherit;
+     opacity: 100%;
+    }
+    .hero-content{
+        position: relative;
+        float: left;
+        margin-top: 50px;
+    } 
+    .tablet-nav{
+        display: none;
+    }
+    .nav-content{
+         display: block; 
+     }
+     .logo-container{
+         width: 0;
+     }
+     .nav-content{
+         margin-top: 24px;
+     }
+     .nav-content ul li{
+         display: inline-block;
+         padding: 0px 0px 0px 30px;
+     }
+     .header-content-left{
+         width:70%;
+     }
+     .header-content-right{
+         width: 30%;
+     }
+     .sobrenos-hero-content{
+        margin-top: 10%;
+    }
+     .sobrenos-hero-content span{
+        font-size: 16px;
+    }
+    .autacao-content{
+        margin-left:15%;
+    }
+}
+
+
+@media only screen and (min-width:990px){
+  
+   .item-hero-footer{
+       width: 25%;
+       margin: 0px;
+       padding: 0px;
+   }
+   .servicos-content{
+       margin-top: 50px;
+   }
+   .servicos-item{
+        width: 25%;
+        height:208px;
+        margin: 0px;
+        padding: 10px 5px 20px 5px;
+   }
+   .servicos-item-description{
+       margin-top: 47px;
+   }
+   .servicos-item{
+       padding-left: 24px;
+   }
+   .autacao-container{
+    margin-top: 50px;
+    }
+
+   .planos-content{
+       width: 25%;
+   }
+   .planos-click-button{
+       padding: 10px 5px;
+   }
+   .carousel{
+    padding-bottom: 40px;
+    }
+    .comment-text{
+        margin-top: 15px;
+    }
+    .header-content-left{
+        width:68%;
+    }
+    .header-content-right{
+        width: 28%;
+    } 
+    .sign-up{
+        padding:20px 30px;
+    }
+    .nav-content{
+        padding-left: 30px;
+        margin-top: 32px;
+    }
+    .logo-container{
+        margin-top: 25px;
+    }    
+    .section-header h2{
+        font-size: 32px;
+        line-height: 40px;
+    }
+    .hero-content h1{
+        font-size: 32px;
+        line-height: 40px;
+        margin-bottom: 40px;
+    }
+    .hero-button{
+        margin-top: 40px;
+        padding: 17px 61px 18px 61px;
+    }
+    .hero-footer-container{
+        margin-top:50px;
+    }
+    .autacao-content{
+        width: 22%;
+        margin-left:1%;
+        margin-right: 1%;
+    }
+
+}
+@media only screen and (min-width:1200px) {
+    .header-content-left{
+        width:68%;
+    }
+    .header-content-right{
+        width: 30%;
+    }
+
+    .nav-content{
+        padding-left: 20%;
+    }
+    .nav-content ul li{
+        display: inline-block;
+        padding: 0px 0px 0px 50px;
+    }
+}
+@media only  screen and (min-width:1280px) {
+    .container{
+        width: 88.75%;
+        margin: auto;
+    }
+    .planos-content{
+        margin-top: 48px;
+        height: 300px;
+        width: 25%;
+    }
+    .planos-content-header{
+        margin-top: 10px;
+    }
+    .planos-button{
+        bottom: 20px;
+        margin-left:3%;
+    }   
+    .comment{      
+        width:65.15%;
+        margin: 85px auto;
+    }
+    .nav-content ul li{
+        display: inline-block;
+        padding: 0px 0px 0px 50px;
+    }
+    .nav-content{
+        margin-top: 32px;
+    }
+    .sign-up{
+        padding:20px 50px;
+    }
+    .sobrenos-hero-content{
+        margin-top: 15%;
+    }
+    
+}
+@media only screen and (min-width:1400px) {
+    .header-content-left{
+        width:65%;
+    }
+    .header-content-right{
+        width: 30%;
+    }
+    .nav-content{
+        padding-left: 20%;
+    }
+}
+
+
+
+
