@@ -6,7 +6,6 @@ let currentImageIndex = 0
 
 const wrapper = document.querySelector('.carousel-container')
 wrapper.style.position = 'relative'
-wrapper.style.border = '1px solid #000'
 wrapper.style.width = '500px'
 wrapper.style.height = '500px'
 wrapper.style.margin = 'auto'
