@@ -1,31 +1,33 @@
-const imageWidth = 500
-let finalImageIndex = 4
+const wrapper = document.querySelector('.carousel-container')
+const imageWrapper = document.querySelector('.carousel-image-container')
+
+const images = imageWrapper.children
+const imageWidth = images[0].clientWidth
+const imageHeight = images[0].clientHeight
+const noOfImage = imageWrapper.children.length
+
+let finalImageIndex = noOfImage -1
 let initialImageIndex = 0
 let currentImageIndex = 0
 
-
-const wrapper = document.querySelector('.carousel-container')
+//crousel-container style
 wrapper.style.position = 'relative'
-wrapper.style.width = '500px'
-wrapper.style.height = '500px'
+wrapper.style.width = `${imageWidth}px`
+wrapper.style.height = `${imageHeight}px`
 wrapper.style.margin = 'auto'
 wrapper.style.overflow = 'hidden'
 
-const images = document.querySelector('.carousel-image-container')
-images.style.position = 'absolute'
-images.style.top = '0px'
-images.style.height = '500px'
-images.style.width = `${images.children.length * imageWidth}`
+imageWrapper.style.position = 'absolute'
+imageWrapper.style.top = '0px'
+imageWrapper.style.width = `${imageWrapper.children.length * imageWidth}`
 
-const noOfImage = images.children.length
-
-
+//assign width of imageWrapper
 for (let i = 0; i < noOfImage ; i++){
-    const image = images.children [i]
+    const image = imageWrapper.children [i]
     image.style.left = `${i * imageWidth}px`
 }
 
-// CROUSEL BUTTON
+// create crousel button left
 const btnLeft =  document.createElement('button')
 btnLeft.style.height = '40px'
 btnLeft.style.width = '30px'
@@ -37,6 +39,7 @@ btnLeft.style.position = 'absolute'
 btnLeft.addEventListener('click',slideLeft)
 wrapper.appendChild(btnLeft)
 
+// slide left (previous image)
 function slideLeft(){
     let dx = 0
     currentImageIndex = ((!currentImageIndex <= 0) ? currentImageIndex -= 1 : currentImageIndex = finalImageIndex)
@@ -45,9 +48,9 @@ function slideLeft(){
         if (dx >= - 500){
            if(currentImageIndex != finalImageIndex){
                console.log(currentImageIndex)
-               images.style.left = `-${(currentImageIndex  + 1  ) * imageWidth + dx }px` 
+               imageWrapper.style.left = `-${(currentImageIndex  + 1  ) * imageWidth + dx }px` 
            }else{
-               images.style.left = `-${finalImageIndex * imageWidth}px`
+               imageWrapper.style.left = `-${finalImageIndex * imageWidth}px`
            }
         }
         else{
@@ -57,7 +60,7 @@ function slideLeft(){
     }, 10)
  }
 
-
+// create crousel button right
 const btnRight = document.createElement('button')
 btnRight.innerHTML = '&#8594;'
 btnRight.style.position = 'absolute'
@@ -70,6 +73,7 @@ btnRight.style.fontSize = '25px'
 btnRight.addEventListener('click',slideRight)
 wrapper.appendChild(btnRight)
 
+// slide right (next image)
 function slideRight(){
     let dx = 0
     currentImageIndex = ((currentImageIndex < 4) ? currentImageIndex += 1 : currentImageIndex = 0)
@@ -78,9 +82,9 @@ function slideRight(){
         console.log(dx)
         if(dx <= 500 ){
             if(currentImageIndex != 0 ){
-                images.style.left = `${-(currentImageIndex - 1 ) * imageWidth - dx }px`
+                imageWrapper.style.left = `${-(currentImageIndex - 1 ) * imageWidth - dx }px`
             }else{
-                images.style.left = '0px'
+                imageWrapper.style.left = '0px'
             }
         }else{
             clearInterval(interval)
@@ -90,8 +94,7 @@ function slideRight(){
     
 }
 
-// CROUSEL INDICATOR
-
+// create crousel indicator
 let indicatorWrapper =  document.createElement('div')
 indicatorWrapper.style.position = 'absolute'
 indicatorWrapper.style.top = '450px'
@@ -111,10 +114,11 @@ for (let i = 0; i < noOfImage; i++){
     indicator.onclick = function(){
         currentImageIndex = i
         currentIndicatorId = indicator.getAttribute('indicator-id')
-        images.style.left = `-${currentImageIndex * imageWidth}px`
+        imageWrapper.style.left = `-${currentImageIndex * imageWidth}px`
     }
 }
 
+// indicator color controller
 let inidicatorController = setInterval(() => {
     indicatorWrapper.childNodes.forEach(element => {
        if(currentImageIndex == element.getAttribute('indicator-id')){
