@@ -3,6 +3,26 @@
     margin: 0;
     padding: 0;
 }
+.wrapper{
+    width: 100%;
+}
+
+.crousel{
+    width: 67%;
+    margin: 0px auto;
+}
+
+.float-l{
+    float: left;
+}
+
+
+.clearfix::after{
+    content: '';
+    clear: both;
+    display: table;
+}
+
 
 img{
     position: absolute;
