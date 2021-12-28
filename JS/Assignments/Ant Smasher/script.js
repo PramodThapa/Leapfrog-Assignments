@@ -1,4 +1,4 @@
-let canvas = /** @type {HTMLCanvasElement} */ (document.querySelector('#ant-smasher'))
+let canvas = document.querySelector('#ant-smasher')
 let ctx = canvas.getContext("2d")
 
 let canvasWidth = canvas.clientWidth
@@ -19,8 +19,8 @@ class Ant{
         this.height = height
 
         this.speed = 2
-        this.xDirection = Math.random() < 0.5 ? 1 : -1
-        this.yDirection = Math.random() < 0.5 ? 1 : -1
+        this.xDirection =  Math.random() < 0.5 ? 1 : -1
+        this.yDirection =  Math.random() < 0.5 ? 1 : -1
 
     }
 
@@ -34,13 +34,16 @@ class Ant{
         this.checkWallCollision()
         this.xPosition += this.speed * this.xDirection
         this.yPosition += this.speed * this.yDirection
+        this.checkAntCollision()
     }
     
     checkWallCollision(){
-       if(this.xPosition < 0 || this.xPosition >= canvasWidth - this.width){
+       if(this.xPosition < 0 || this.xPosition + this.width >= canvasWidth){
            this.xDirection *= -1
+    
+           
        }
-       if(this.yPosition < 0 || this.yPosition >= canvasHeight -this.height){
+       if(this.yPosition < 0 || this.yPosition + this.height >= canvasHeight){
            this.yDirection *= -1
        }
     }
@@ -55,16 +58,14 @@ class Ant{
                 this.yPosition < antArray[i].yPosition + antArray[i].height &&
                 this.yPosition + this.height > antArray[i].yPosition){
 
-                antArray[i].xDirection *= -1
-                antArray [i].yDirection *= -1 
-                this.xDirection *= -1
-                this.yDirection *= -1                 
+                antArray[i].xDirection *= this.xDirection
+                antArray [i].yDirection *= -this.yDirection              
             }
         }
     }
 }
 
-const antCount = 15
+const antCount = 10
 
 let antArray = []
 
@@ -92,7 +93,6 @@ function animate() {
     ctx.closePath()
 
     for (let i= 0; i < antArray.length; i++){
-        antArray[i].checkAntCollision()
         antArray[i].updateAnt()
         antArray[i].drawAnt()
         showScore()
