@@ -32,9 +32,9 @@ class Ant{
     
     updateAnt(){
         this.checkWallCollision()
+        this.checkAntCollision()
         this.xPosition += this.speed * this.xDirection
         this.yPosition += this.speed * this.yDirection
-        this.checkAntCollision()
     }
     
     checkWallCollision(){
@@ -76,8 +76,8 @@ minAntWidth = 35
 function generateAttribute(){
     let width = Math.floor(Math.random() * maxAntWidth) + minAntWidth
     let height = width
-    let xPosition = Math.floor(Math.random() * (canvasWidth - maxAntWidth)) + width
-    let yPosition = Math.floor(Math.random() * (canvasHeight - minAntWidth)) + height
+    let xPosition = Math.floor(Math.random() * (canvasWidth - maxAntWidth)) 
+    let yPosition = Math.floor(Math.random() * (canvasHeight - minAntWidth)) 
     return [xPosition, yPosition, width, height]
 }
 
