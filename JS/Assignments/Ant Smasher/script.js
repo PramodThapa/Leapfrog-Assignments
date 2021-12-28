@@ -5,13 +5,18 @@ let canvasWidth = canvas.clientWidth
 let canvasHeight = canvas.clientHeight
 
 class Ant{
+    /**
+     * 
+     * @param {*} xPosition || x position of the ant
+     * @param {*} yPosition || y position of the ant
+     * @param {*} width || width of the ant 
+     * @param {*} height || height of the ant
+     */
     constructor(xPosition, yPosition, width, height){
-
         this.xPosition = xPosition
         this.yPosition = yPosition
         this.width = width
         this.height = height
-
 
         this.speed = 2
         this.xDirection = Math.random() < 0.5 ? 1 : -1
@@ -92,12 +97,17 @@ function animate() {
         antArray[i].drawAnt()
         showScore()
     }
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animate)
 }
 
 requestAnimationFrame(animate)
 
 let gameScore = 0
+
+function showScore(){
+    ctx.font = 'bold 16px Italic'
+    ctx.fillText (`SCORE: ${gameScore}`,20,50)
+}
 
 canvas.addEventListener('click',(e)=>{
     let x = e.clientX
@@ -111,10 +121,5 @@ canvas.addEventListener('click',(e)=>{
         }
     }
 })
-
-function showScore(){
-    ctx.font = 'bold 16px Italic'
-    ctx.fillText (`SCORE: ${gameScore}`,20,50)
-}
 
 

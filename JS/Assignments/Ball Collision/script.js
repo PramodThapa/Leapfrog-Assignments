@@ -1,12 +1,18 @@
-let canvas = /** @type {HTMLCanvasElement} */ (document.querySelector('canvas'))
+let canvas = document.querySelector('canvas')
 let ctx = canvas.getContext("2d")
 
 let canvasWidth = canvas.clientWidth
 let canvasHeight = canvas.clientHeight
 
 class Ball{
+    /**
+     * 
+     * @param {*} radius || radius of the ball
+     * @param {*} color || color of the ball
+     * @param {*} xPosition || x position of the ball
+     * @param {*} yPosition || y position of the ball
+     */
     constructor(radius, color, xPosition, yPosition){
-
         this.xPosition = xPosition
         this.yPosition = yPosition
 
@@ -18,8 +24,6 @@ class Ball{
         this.xDirection = Math.random() < 0.5 ? 1 : -1
         this.yDirection = Math.random() < 0.5 ? 1 : -1
 
-        this.checkWallCollision()
-        this.checkBallCollision()
     }
 
     drawBall(){
@@ -59,6 +63,7 @@ class Ball{
             let ditanceY = (this.yPosition + this.radius) - (ballArray[i].yPosition + ballArray[i].radius)
             let distance = Math.sqrt((distanceX * distanceX) + (ditanceY * ditanceY))
             let length = this.radius + ballArray[i].radius
+
             if (distance <= (this.radius + ballArray[i].radius)){
                 ballArray[i].xDirection = -(ballArray[i].xDirection)
                 ballArray [i].yDirection = -(ballArray [i].yDirection) 
