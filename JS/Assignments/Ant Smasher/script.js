@@ -44,7 +44,7 @@ class Ant{
            
        }
        if(this.yPosition < 0 || this.yPosition + this.height >= canvasHeight){
-           this.yDirection *= -1
+           this.yDirection *=  -1
        }
     }
 
@@ -58,8 +58,8 @@ class Ant{
                 this.yPosition < antArray[i].yPosition + antArray[i].height &&
                 this.yPosition + this.height > antArray[i].yPosition){
 
-                antArray[i].xDirection *= this.xDirection
-                antArray [i].yDirection *= -this.yDirection              
+                antArray[i].xDirection *= -this.xDirection
+                antArray [i].yDirection *= this.yDirection              
             }
         }
     }
@@ -113,8 +113,6 @@ canvas.addEventListener('click',(e)=>{
     let x = e.clientX
     let y = e.clientY
     for(let i = 0; i < antArray.length; i++){
-        console.log(antArray[i].xPosition, antArray[i].yPosition)
-        console.log(x,y)
         if(x >= antArray[i].xPosition && x <= antArray[i].xPosition + antArray[i].width && y >= antArray[i].yPosition && y <= antArray[i].yPosition + antArray[i].height){
             antArray.splice(i,1)
             gameScore++
