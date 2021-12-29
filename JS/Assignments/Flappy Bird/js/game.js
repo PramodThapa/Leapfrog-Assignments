@@ -98,12 +98,12 @@ function gameLoop(){
         ground.drawGround()
 
         if(highscore !== null){
-            if (SCORE > highscore) {
-                localStorage.setItem("highscore", SCORE)     
+            if (CURRENT_SCORE > highscore) {
+                localStorage.setItem("highscore", CURRENT_SCORE)     
             }
         }
         else{
-            localStorage.setItem("highscore", SCORE)
+            localStorage.setItem("highscore", CURRENT_SCORE)
         }
         
     }
