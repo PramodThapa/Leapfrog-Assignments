@@ -1,0 +1,50 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+  background-color: lawngreen;
+}
+.road {
+  margin: 0 auto;
+  width: 300px;
+  display: flex;
+  overflow: hidden;
+  background: url('img/lane.jpg');
+  background-size: 100%;
+  position: relative;
+}
+
+.lane {
+  flex: 1;
+  height: 100vh;
+}
+
+.car {
+  width: 50px;
+  height: 100px;
+  position: absolute;
+  background: url('img/car.png');
+  background-repeat: no-repeat;
+  background-size: 95% ;
+  bottom: 10px;
+  transition: 0.4s;
+}
+
+.car.lane-left {
+  left: 25px;
+}
+
+.car.lane-middle {
+  left: 125px;
+}
+
+.car.lane-right {
+  left: 225px;
+}
+
+.wrapper{
+  position: relative;
+}
