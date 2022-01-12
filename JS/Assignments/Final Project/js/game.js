@@ -6,8 +6,8 @@ let COLLISION_ARRAY = [];
 let COIN_COUNT;
 let STAGE = 1;
 
-let getReady = false;
-let playing = true;
+let getReady = true;
+let playing = false;
 let gameOver = false;
 let play = false;
 let playAudio = false;
