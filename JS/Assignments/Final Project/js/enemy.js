@@ -89,38 +89,8 @@ class Enemy{
     getHealth(){
         return this.health;
     }
-    setHealth(health){
-        this.health -= health;
-    }
+    // setHealth(health){
+    //     this.health -= health;
+    // }
 
-}
-
-class Obstacle{
-
-    constructor(xPosition, yPosition, height, width){
-        this.xPosition = xPosition
-        this.yPosition = yPosition
-        this.height =  height
-        this.width = width
-    }
-
-    drawObstacle(Image){
-        ctx.drawImage(image, 0, 0, this.height, this.width, this.xPosition, this.yPosition, TILES_WIDTH, TILES_HEIGHT)
-    }
-
-    getTop(){
-        return this.yPosition;
-    }
-
-    getBottom(){
-        return this.xPosition + TILES_HEIGHT;
-    }
-
-    getRight(){
-        return this.xPosition + TILES_WIDTH;
-    }
-
-    getLeft(){
-        return this.xPosition;
-    }
 }

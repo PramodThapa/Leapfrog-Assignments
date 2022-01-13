@@ -7,8 +7,8 @@ canvas.height = 720;
 let WIDTH = canvas.width;
 let HEIGHT = canvas.height;
 
-const TILES_WIDTH = 30
-const TILES_HEIGHT = 30
+const TILES_WIDTH = 30;
+const TILES_HEIGHT = 30;
 
 const MAP_STAGE_1 = [
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 5,
