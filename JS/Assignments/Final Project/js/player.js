@@ -131,25 +131,25 @@ class Player {
         }
       }
 
-      if (keyPressed[" "] && keyPressed["ArrowRight"]) {
-        if (
-          COLLISION_ARRAY[this.mapY - 1][this.mapX] != 1 &&
-          COLLISION_ARRAY[this.mapY - 1][this.mapX] != 2 &&
-          COLLISION_ARRAY[this.mapY][this.mapX + 1] != 1 &&
-          COLLISION_ARRAY[this.mapY][this.mapX + 1] != 2
-        ) {
-          this.jumping = true;
-          this.yPosition -= 2;
-          this.xPosition += 2;
-          if (Math.floor(this.yPosition % TILES_HEIGHT) === 0) {
-            this.mapY -= 1;
-          }
-          if (Math.floor(this.xPosition % TILES_WIDTH) === 0) {
-            this.mapX += 1;
-          }
-          //console.log(this.mapY, this.mapY)
-        }
-      }
+      // if (keyPressed[" "] && keyPressed["ArrowRight"]) {
+      //   if (
+      //     COLLISION_ARRAY[this.mapY - 1][this.mapX] != 1 &&
+      //     COLLISION_ARRAY[this.mapY - 1][this.mapX] != 2 &&
+      //     COLLISION_ARRAY[this.mapY][this.mapX + 1] != 1 &&
+      //     COLLISION_ARRAY[this.mapY][this.mapX + 1] != 2
+      //   ) {
+      //     this.jumping = true;
+      //     this.yPosition -= 2;
+      //     this.xPosition += 2;
+      //     if (Math.floor(this.yPosition % TILES_HEIGHT) === 0) {
+      //       this.mapY -= 1;
+      //     }
+      //     if (Math.floor(this.xPosition % TILES_WIDTH) === 0) {
+      //       this.mapX += 1;
+      //     }
+      //     //console.log(this.mapY, this.mapY)
+      //   }
+      // }
 
     //   if (keyPressed[" "] && keyPressed["ArrowLeft"]) {
     //     if (
@@ -187,7 +187,7 @@ class Player {
       COLLISION_ARRAY[this.mapY + 1][this.mapX] != 8
     ) {
       this.yPosition += this.gravity;
-      HEALTH -= 0.1;
+      HEALTH -= 0.05;
       //console.log(this.yPosition);
       if (Math.floor(this.yPosition % TILES_HEIGHT) === 0) {
         this.mapY += 1;
