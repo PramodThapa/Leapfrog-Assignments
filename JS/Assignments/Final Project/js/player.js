@@ -1,4 +1,11 @@
 class Player {
+  /**
+   * 
+   * @param {*} height || height of the enemy in the spritesheet
+   * @param {*} width || width of the player in spritesheet
+   * @param {*} xPosition || yPosition of the enemy
+   * @param {*} yPosition || yPosition of the enemy
+   */
   constructor(height, width, xPosition, yPosition) {
     this.height = height;
     this.width = width;
@@ -35,7 +42,7 @@ class Player {
     window.addEventListener("keydown", (e) => {
       switch (e.key) {
         case "ArrowDown":
-          if (this.yPosition < HEIGHT - TILES_HEIGHT) {
+          if (this.yPosition < CANVAS_HEIGHT - TILES_HEIGHT) {
             if (COLLISION_ARRAY[this.mapY + 1][this.mapX] === 8) {
               this.playerDirection = "up";
               this.frameDirection = 1;
@@ -58,12 +65,10 @@ class Player {
               this.frameY = 3;
               this.yPosition -= this.velocityY;
               this.mapY = Math.floor(this.yPosition / TILES_HEIGHT);
-              //console.log(this.mapY);
             } else {
               this.yPosition = (this.mapY - 1) * TILES_HEIGHT + TILES_HEIGHT;
             }
           }
-          //console.log(COLLISION_ARRAY[this.mapY][this.mapX] + 'Up')
           break;
 
         case "ArrowLeft":
@@ -78,7 +83,6 @@ class Player {
               this.moving = true;
               this.frameY = 2;
               this.xPosition -= this.velocityX;
-              //console.log(this.mapX);
             } else {
               this.xPosition = (this.mapX - 1) * TILES_WIDTH + TILES_WIDTH;
             }
@@ -86,7 +90,7 @@ class Player {
 
           break;
         case "ArrowRight":
-          if (this.xPosition < WIDTH - TILES_WIDTH) {
+          if (this.xPosition < CANVAS_WIDTH - TILES_WIDTH) {
             if (
               COLLISION_ARRAY[this.mapY][this.mapX + 1] != 1 &&
               COLLISION_ARRAY[this.mapY][this.mapX + 1] != 2
@@ -99,10 +103,8 @@ class Player {
               if (Math.floor(this.xPosition % TILES_WIDTH) === 0) {
                 this.mapX += 1;
               }
-              //console.log(this.xPosition,this.mapX + 'Right')
             }
           }
-          //console.log(this.mapX);
           break;
       }
     });
@@ -125,51 +127,10 @@ class Player {
           this.yPosition -= 5;
           FUEL -= 2;
           this.mapY = Math.floor(this.yPosition / TILES_HEIGHT);
-          //console.log(this.mapY);
         } else {
           this.yPosition = (this.mapY - 1) * TILES_HEIGHT + TILES_HEIGHT;
         }
       }
-
-      // if (keyPressed[" "] && keyPressed["ArrowRight"]) {
-      //   if (
-      //     COLLISION_ARRAY[this.mapY - 1][this.mapX] != 1 &&
-      //     COLLISION_ARRAY[this.mapY - 1][this.mapX] != 2 &&
-      //     COLLISION_ARRAY[this.mapY][this.mapX + 1] != 1 &&
-      //     COLLISION_ARRAY[this.mapY][this.mapX + 1] != 2
-      //   ) {
-      //     this.jumping = true;
-      //     this.yPosition -= 2;
-      //     this.xPosition += 2;
-      //     if (Math.floor(this.yPosition % TILES_HEIGHT) === 0) {
-      //       this.mapY -= 1;
-      //     }
-      //     if (Math.floor(this.xPosition % TILES_WIDTH) === 0) {
-      //       this.mapX += 1;
-      //     }
-      //     //console.log(this.mapY, this.mapY)
-      //   }
-      // }
-
-    //   if (keyPressed[" "] && keyPressed["ArrowLeft"]) {
-    //     if (
-    //       COLLISION_ARRAY[this.mapY - 1][this.mapX] != 1 &&
-    //       COLLISION_ARRAY[this.mapY - 1][this.mapX] != 2 &&
-    //       COLLISION_ARRAY[this.mapY][this.mapX - 1] != 1 &&
-    //       COLLISION_ARRAY[this.mapY][this.mapX - 1] != 2
-    //     ) {
-    //       this.jump = true;
-    //       this.yPosition -= 2;
-    //       this.xPosition -= 2;
-    //       if (Math.floor(this.yPosition % TILES_HEIGHT) === 0) {
-    //         this.mapY -= 1;
-    //       }
-    //       if (Math.floor(this.xPosition % TILES_WIDTH) === 0) {
-    //         this.mapX -= 1;
-    //       }
-    //       //console.log(this.mapY, this.mapY)
-    //     }
-    //     }
     });
 
     addEventListener("keyup", (e) => {
@@ -179,7 +140,6 @@ class Player {
   }
 
   isFalling() {
-    //console.log(this.jumping)
     if (
       this.jumping === false &&
       COLLISION_ARRAY[this.mapY + 1][this.mapX] != 1 &&
@@ -188,7 +148,6 @@ class Player {
     ) {
       this.yPosition += this.gravity;
       HEALTH -= 0.05;
-      //console.log(this.yPosition);
       if (Math.floor(this.yPosition % TILES_HEIGHT) === 0) {
         this.mapY += 1;
       }

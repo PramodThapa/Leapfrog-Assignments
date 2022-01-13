@@ -4,8 +4,8 @@ const COLUMN = 32;
 canvas.width = 960;
 canvas.height = 720;
 
-let WIDTH = canvas.width;
-let HEIGHT = canvas.height;
+const CANVAS_WIDTH = canvas.width;
+const CANVAS_HEIGHT = canvas.height;
 
 const TILES_WIDTH = 30;
 const TILES_HEIGHT = 30;

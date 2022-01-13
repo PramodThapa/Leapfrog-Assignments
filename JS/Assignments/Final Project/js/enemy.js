@@ -1,5 +1,16 @@
 
 class Enemy{
+    /**
+     * 
+     * @param {*} xPosition || xPosition of the the enemy
+     * @param {*} yPosition || yPosition of the the enemy
+     * @param {*} xEnd || End position of the enemy in X direction 
+     * @param {*} yEnd  || End position of the enemy in Y direction
+     * @param {*} height ||  Height of the enemy in spritesheet
+     * @param {*} width ||  Width of the enemy in spritesheet
+     * @param {*} direction || Direction of the enemy
+     * @param {*} health || Health of the enemy
+     */
     constructor(xPosition, yPosition, xEnd, yEnd, height, width, direction,health){
         this.direction = direction;
         this.xPosition = xPosition;
@@ -89,8 +100,4 @@ class Enemy{
     getHealth(){
         return this.health;
     }
-    // setHealth(health){
-    //     this.health -= health;
-    // }
-
 }

@@ -50,45 +50,6 @@ let FUEL = 100;
 let HEALTH = 100;
 let LIFE = 02;
 
-//LOADING AUDIO
-
-const HURT_AUDIO = new Audio("./audio/hurt.mp3");
-const COIN_COLLECT = new Audio("./audio/coinCollect.wav");
-const GAME_AUDIO = new Audio("./audio/gameAudio.mp3");
-
-//CHARACTER SPRITE
-
-let CHARACTER_SPRITE_WIDTH = 1570;
-let CHARACTER_SPRITE_HEIGHT = 2048;
-let SPRITE_COLUMN = 4;
-let SPRITE_ROW = 4;
-let CHARACTER_HEIGHT = CHARACTER_SPRITE_HEIGHT / SPRITE_ROW;
-let CHARACTER_WIDTH = CHARACTER_SPRITE_WIDTH / SPRITE_COLUMN;
-
-//WEAPON DIMENSION
-
-const BULLET_FIRE_HEIGHT = 447;
-const BULLET_FIRE_WIDTH = 571;
-
-const BULLET_HEIGHT = 513;
-const BULLET_WIDTH = 173;
-
-//ENEMY SPRITE
-
-let ENEMY_SPRITE_WIDTH = 128;
-let ENEMY_SPRITE_HEIGHT = 192;
-let ENEMY_SPRITE_ROW = 4;
-let ENEMY_SPRITE_COLUMN = 4;
-let ENEMY_HEIGHT = ENEMY_SPRITE_HEIGHT / ENEMY_SPRITE_ROW;
-let ENEMY_WIDTH = ENEMY_SPRITE_WIDTH / ENEMY_SPRITE_COLUMN;
-
-//BACKGROUND AND LOGO DIMENSION
-const BACKGROUND_WIDTH = 621;
-const BACKGROUND_HEIGHT = 333;
-const LOGO_WIDTH = 180;
-const LOGO_HEIGHT = 39;
-
-
 //PLAYER
 let user = new Player(CHARACTER_HEIGHT, CHARACTER_WIDTH, 30, 660);
 
@@ -128,6 +89,9 @@ let fuelStatus = new StatusBar(
   200,
   30
 );
+
+//COIN
+let coinArray = [];
 
 //LIFE
 let lifeArray = [];
@@ -349,7 +313,7 @@ function gameLoop() {
       if (ENEMY_INITILIZE === false) {
         initilizeEnemy();
       }
-      getVaccantPosition();
+      getVaccantPosition(COLLISION_ARRAY_STAGE_1);
     } else if (STAGE === 2) {
       stageState[1] = "unlocked";
       localStorage.setItem("stage", JSON.stringify(stageState));
@@ -365,7 +329,7 @@ function gameLoop() {
         initilizeEnemy();
         ENEMY_INITILIZE = true;
       }
-      getVaccantPosition();
+      getVaccantPosition(COLLISION_ARRAY_STAGE_2);
     } else if (STAGE === 3) {
       stageState[2] = "unlocked";
       localStorage.setItem("stage", JSON.stringify(stageState));
@@ -381,7 +345,7 @@ function gameLoop() {
         initilizeEnemy();
         ENEMY_INITILIZE = true;
       }
-      getVaccantPosition();
+      getVaccantPosition(COLLISION_ARRAY_STAGE_3);
     }
     generateAsset();
 
@@ -666,7 +630,6 @@ function bulletEnemyCollision() {
         bulletY === enemyY &&
         user.playerDirection === "right"
       ) {
-        console.log("collided");
         groundEnemyArray[i].health -= 10;
         if (groundEnemyArray[i].getHealth() <= 0) {
           groundEnemyArray.splice(i, 1);
@@ -677,7 +640,6 @@ function bulletEnemyCollision() {
         bulletY === enemyY &&
         user.playerDirection === "left"
       ) {
-        console.log("collided");
         groundEnemyArray[i].health -= 10;
         if (groundEnemyArray[i].getHealth() <= 0) {
           groundEnemyArray.splice(i, 1);

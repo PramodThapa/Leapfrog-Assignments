@@ -2,7 +2,7 @@
 
 let vaccantPosition = [];
 
-function getVaccantPosition() {
+function getVaccantPosition(COLLISION_ARRAY) {
   for (let i = 0; i < ROW; i++) {
     for (let j = 0; j < COLUMN; j++) {
       if (COLLISION_ARRAY[i][j] === 0) {
@@ -23,7 +23,7 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-// FUNCTION TO DETECT COLLSION BETWEE PLAYER AND GAME ASSET OR ENEMY
+// FUNCTION TO DETECT COLLSION BETWEEN PLAYER AND GAME ASSET OR ENEMY
 
 function detectCollision(xPosition, yPosition, height, width) {
   let playerTop = user.getTop();
@@ -78,5 +78,4 @@ function reset() {
   user.yPosition = 30;
   user.mapX = 1;
   user.mapY = 1;
-  getVaccantPosition();
 }

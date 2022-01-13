@@ -1,20 +1,11 @@
-const LIFE_SPRITE_WIDTH = 254;
-const LIFE_SPRITE_HEIGHT = 254;
-
-const FUEL_SPRITE_WIDTH = 512;
-const FUEL_SPRITE_HEIGHT = 512;
-
-const HEALTH_SPRITE_WIDTH = 943;
-const HEALTH_SPRITE_HEIGHT = 777;
-
-const COIN_SPRITE_WIDTH = 504;
-const COIN_SPRITE_HEIGHT = 84;
-const COIN_FRAME_X = 6;
-
-const COIN_WIDTH = COIN_SPRITE_WIDTH / COIN_FRAME_X;
-const COIN_HEIGHT = COIN_SPRITE_HEIGHT;
-
 class Coin {
+  /**
+   * 
+   * @param {*} height || Height of the coin spritesheet
+   * @param {*} width || Coin of the width spritesheet
+   * @param {*} xPosition || X position of the coin asset
+   * @param {*} yPosition ||  Y position of the coin asset
+   */
   constructor(height, width, xPosition, yPosition) {
     this.height = height;
     this.width = width;
@@ -63,6 +54,13 @@ class Coin {
 }
 
 class Life {
+  /**
+   * 
+   * @param {*} height || Heigth of the life spritesheet
+   * @param {*} width || Width of the life spritesheet
+   * @param {*} xPosition || X position of the life asset
+   * @param {*} yPosition ||  Y position of the life asset
+   */
   constructor(height, width, xPosition, yPosition) {
     this.height = height;
     this.width = width;
@@ -92,6 +90,13 @@ class Life {
 }
 
 class Health {
+  /**
+   * 
+   * @param {*} height || Height of the health spritesheet
+   * @param {*} width || Width of the heath spritesheet 
+   * @param {*} xPosition || X position health asset
+   * @param {*} yPosition  || Y position health asset
+   */
   constructor(height, width, xPosition, yPosition) {
     this.height = height;
     this.width = width;
@@ -121,6 +126,13 @@ class Health {
 }
 
 class Fuel {
+  /**
+   * 
+   * @param {*} height ||Height of the fuel spritesheet
+   * @param {*} width || Width of the  fuel spritesheet
+   * @param {*} xPosition || X position fuel asset
+   * @param {*} yPosition || Y position fuel asset
+   */
   constructor(height, width, xPosition, yPosition) {
     this.height = height;
     this.width = width;
@@ -150,6 +162,18 @@ class Fuel {
 }
 
 class StatusBar {
+  /**
+   * 
+   * @param {*} img || Image  to draw in the status bar
+   * @param {*} spriteWidth || Sprite Width
+   * @param {*} spriteHeight || Sprite Height
+   * @param {*} logoXPosition || logo the the status bar
+   * @param {*} color || Color of the status bar
+   * @param {*} xPosition || X position  of the status bar 
+   * @param {*} yPosition || Y position of the status bar
+   * @param {*} width || Width of the status bar
+   * @param {*} height || Height of the status bar
+   */
   constructor(
     img,
     spriteWidth,
