@@ -111,7 +111,7 @@ const BACKGROUND_HEIGHT = 333;
 const LOGO_WIDTH = 180;
 const LOGO_HEIGHT = 39;
 
-//Asset dimension
+//Asset 
 const LIFE_SPRITE_WIDTH = 254;
 const LIFE_SPRITE_HEIGHT = 254;
 

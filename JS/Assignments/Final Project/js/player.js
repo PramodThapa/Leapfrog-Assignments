@@ -1,10 +1,10 @@
 class Player {
   /**
    *
-   * @param {*} height || height of the enemy in the spritesheet
+   * @param {*} height || height of the player in the spritesheet
    * @param {*} width || width of the player in spritesheet
-   * @param {*} xPosition || yPosition of the enemy
-   * @param {*} yPosition || yPosition of the enemy
+   * @param {*} xPosition || yPosition of the player
+   * @param {*} yPosition || yPosition of the player
    */
   constructor(height, width, xPosition, yPosition) {
     this.height = height;

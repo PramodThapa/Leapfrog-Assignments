@@ -8,15 +8,21 @@ let COLLISION_ARRAY = [];
 let COIN_COUNT;
 let STAGE = 1;
 
+
+// Defining the boolean variable for game state
+
 let getReady = true;
 let playing = false;
 let gameOver = false;
 let play = false;
 let playAudio = false;
-let stageState;
 
-//LOCAL STORAGE
+
+//initilizing the local storage
+
+let stageState;
 let BEST_SCORE;
+
 if (localStorage.getItem("best") === null) {
   BEST_SCORE = 0;
 } else {
@@ -30,11 +36,14 @@ if (localStorage.getItem("stage") === null) {
   stageState = JSON.parse(localStorage.getItem("stage"));
 }
 
-// RUN FUNCTION ONY ONCE IN REQUEST ANIMATION FRAME
+
+// Controlling the function run in request animation frame
+
 let COIN_INITILIZE = false;
 let ENEMY_INITILIZE = false;
 
-//COUNTER
+
+// Count  the game assest and counter
 
 let COUNTER = 0;
 let LIFE_DISPLAY_COUNT = 0;
@@ -42,31 +51,27 @@ let FUEL_DISPLAY_COUNT = 0;
 let HEALTH_DISPLAY_COUNT = 0;
 let BULLET_COUNT = 3;
 let BULLET_FIRED = false;
-
-//HEALTH FUEL LIFE COUNT SCORE
-
 let SCORE = 0;
 let FUEL = 100;
 let HEALTH = 100;
 let LIFE = 02;
 
-//PLAYER
-let user = new Player(CHARACTER_HEIGHT, CHARACTER_WIDTH, 30, 660);
 
-//BULLET ARRAY
+// Defining the array to store the game object
 
 let bulletArray = [];
-
-//ENEMY
-
 let groundEnemyArray = [];
 let spaceEnemyArray = [];
-
-//MAP
+let coinArray = [];
+let lifeArray = [];
+let healthArray = [];
+let fuelArray = [];
 let map = new Map();
 
-//STATUS BAR
 
+// Creating the instance of the class
+
+let user = new Player(CHARACTER_HEIGHT, CHARACTER_WIDTH, 30, 660);
 let healthStatus = new StatusBar(
   healthImage,
   HEALTH_SPRITE_WIDTH,
@@ -90,19 +95,9 @@ let fuelStatus = new StatusBar(
   30
 );
 
-//COIN
-let coinArray = [];
 
-//LIFE
-let lifeArray = [];
+//fps control
 
-//HEALTH
-let healthArray = [];
-
-// FUEL
-let fuelArray = [];
-
-//FPS CONTROL
 let fpsInterval, then, now, startTime, elapsed;
 
 function startGameLoop(fps) {
@@ -112,8 +107,12 @@ function startGameLoop(fps) {
   gameLoop();
 }
 
+
+// function to start gameloop
+
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   if (playAudio === true) {
     GAME_AUDIO.play();
   } else {
@@ -121,334 +120,13 @@ function gameLoop() {
   }
 
   if (getReady === true) {
-    ctx.drawImage(
-      backgroundImg,
-      0,
-      0,
-      BACKGROUND_WIDTH,
-      BACKGROUND_HEIGHT,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-    ctx.drawImage(
-      logoImg,
-      0,
-      0,
-      LOGO_WIDTH,
-      LOGO_HEIGHT,
-      canvas.width / 2 - 100,
-      canvas.height / 2 - 125,
-      200,
-      50
-    );
-    for (let index = 0; index < 32; index++) {
-      ctx.drawImage(startImg, 436, 368, 100, 104, index * 30, 680, 30, 40);
-    }
-    ctx.drawImage(startImg, 358, 180, 177, 154, 0, 530, 150, 150);
-    ctx.drawImage(
-      startImg,
-      0,
-      11,
-      146,
-      53,
-      canvas.width / 2 - 100,
-      canvas.height / 2 - 20,
-      200,
-      50
-    );
-    ctx.font = "12px Ubuntu";
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
-    ctx.strokeText("HOW TO PLAY?", 35, 570);
-    ctx.font = "9px Ubuntu";
-    ctx.lineWidth = 1;
-    ctx.strokeText("ARROW LEFT : LEFT", 35, 590);
-    ctx.strokeText("ARROW RIGHT : RIGHT", 30, 600);
-    ctx.strokeText("ARROW DOWN : DOWN", 30, 610);
-    ctx.strokeText("ARROW UP : CLIMB", 35, 620);
-    ctx.strokeText("SPACE : FLY", 60, 630);
-    ctx.strokeText("F : FIRE", 60, 640);
-    if (playAudio === false) {
-      ctx.drawImage(audioOFFImg, 0, 112, 980, 870, 0, 0, 30, 30);
-    } else if (playAudio === true) {
-      ctx.drawImage(audioONImg, 0, 0, 980, 870, 0, 0, 30, 30);
-    }
-    ctx.drawImage(startImg, 358, 180, 177, 154, 800, 530, 150, 150);
-    ctx.font = "15px Ubuntu";
-    ctx.lineWidth = 2;
-    ctx.strokeText(`BEST SCORE: ${BEST_SCORE}`, 825, 590);
-    ctx.fill();
-    addEventListener("click", (e) => {
-      let rect = canvas.getBoundingClientRect();
-      let xPosition = e.clientX - rect.left;
-      let yPosition = e.clientY - rect.top;
-      if (
-        detectMouseCollision(
-          xPosition,
-          yPosition,
-          200,
-          50,
-          canvas.width / 2 - 100,
-          canvas.height / 2 - 20
-        )
-      ) {
-        play = true;
-        getReady = false;
-      }
-      if (detectMouseCollision(xPosition, yPosition, 30, 30, 0, 0)) {
-        playAudio = !playAudio;
-      }
-    });
+    handleGetReadyState();
   } else if (play === true) {
-    ctx.drawImage(
-      backgroundImg,
-      0,
-      0,
-      BACKGROUND_WIDTH,
-      BACKGROUND_HEIGHT,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-    ctx.drawImage(
-      logoImg,
-      0,
-      0,
-      LOGO_WIDTH,
-      LOGO_HEIGHT,
-      canvas.width / 2 - 100,
-      canvas.height / 2 - 125,
-      200,
-      50
-    );
-    for (let index = 0; index < 32; index++) {
-      ctx.drawImage(startImg, 436, 368, 100, 104, index * 30, 680, 30, 40);
-    }
-    ctx.drawImage(startImg, 358, 180, 177, 154, 0, 530, 150, 150);
-
-    if (playAudio === false) {
-      ctx.drawImage(audioOFFImg, 0, 112, 980, 870, 0, 0, 30, 30);
-    } else if (playAudio === true) {
-      ctx.drawImage(audioONImg, 0, 0, 980, 870, 0, 0, 30, 30);
-    }
-    ctx.drawImage(cancelImg, 0, 0, 258, 258, 930, 0, 30, 30);
-    ctx.drawImage(startImg, 182, 0, 144, 162, 400, 530, 150, 150);
-    ctx.drawImage(startImg, 358, 180, 177, 154, 800, 530, 150, 150);
-    ctx.font = "25px Ubuntu";
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
-    ctx.strokeText("STAGE 1", 430, 570);
-    ctx.strokeText("STAGE 2", 430, 610);
-    ctx.strokeText("STAGE 3", 430, 650);
-    ctx.font = "12px Ubuntu";
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
-    ctx.strokeText("HOW TO PLAY?", 35, 570);
-    ctx.font = "9px Ubuntu";
-    ctx.lineWidth = 1;
-    ctx.strokeText("ARROW LEFT : LEFT", 35, 590);
-    ctx.strokeText("ARROW RIGHT : RIGHT", 30, 600);
-    ctx.strokeText("ARROW DOWN : DOWN", 30, 610);
-    ctx.strokeText("ARROW UP : CLIMB", 35, 620);
-    ctx.strokeText("SPACE : FLY", 60, 630);
-    ctx.strokeText("F : FIRE", 60, 640);
-    ctx.font = "15px Ubuntu";
-    ctx.lineWidth = 2;
-    ctx.strokeText(`BEST SCORE: ${BEST_SCORE}`, 825, 590);
-    if (stageState[1] === "locked") {
-      ctx.drawImage(levelLockedImg, 0, 0, 512, 512, 410, 590, 20, 20);
-    }
-
-    if (stageState[2] === "locked") {
-      ctx.drawImage(levelLockedImg, 0, 0, 512, 512, 410, 630, 20, 20);
-    }
-
-    addEventListener("click", (e) => {
-      let rect = canvas.getBoundingClientRect();
-      let xPosition = e.clientX - rect.left;
-      let yPosition = e.clientY - rect.top;
-      if (detectMouseCollision(xPosition, yPosition, 120, 40, 410, 542)) {
-        STAGE = 1;
-        play = false;
-        playing = true;
-      }
-      if (
-        detectMouseCollision(xPosition, yPosition, 120, 40, 410, 582) &&
-        stageState[1] === "unlocked"
-      ) {
-        STAGE = 2;
-        play = false;
-        playing = true;
-      }
-      if (
-        detectMouseCollision(xPosition, yPosition, 120, 40, 410, 622) &&
-        stageState[2] === "unlocked"
-      ) {
-        STAGE = 3;
-        play = false;
-        playing = true;
-      }
-      if (detectMouseCollision(xPosition, yPosition, 30, 30, 0, 0)) {
-        playAudio = !playAudio;
-      }
-      if (detectMouseCollision(xPosition, yPosition, 30, 30, 930, 0)) {
-        play = false;
-        getReady = true;
-      }
-    });
+    handlePlayState();
   } else if (playing === true) {
-    COUNTER++;
-    if (STAGE === 1) {
-      STAGE = 1;
-      MAP = MAP_STAGE_1;
-      getVaccantPosition(COLLISION_ARRAY_STAGE_1);
-      COLLISION_ARRAY = COLLISION_ARRAY_STAGE_1;
-      coinPosition = COIN_POSITION_STAGE_1;
-      if (COIN_INITILIZE === false) {
-        initilizeCoin();
-      }
-      groundEnemy = GROUND_ENEMY_STAGE_1;
-      spaceEnemy = SPACE_ENEMY_STAGE_1;
-      if (ENEMY_INITILIZE === false) {
-        initilizeEnemy();
-      }
-    } else if (STAGE === 2) {
-      STAGE = 2;
-      stageState[1] = "unlocked";
-      localStorage.setItem("stage", JSON.stringify(stageState));
-      getVaccantPosition(COLLISION_ARRAY_STAGE_2);
-      MAP = MAP_STAGE_2;
-      COLLISION_ARRAY = COLLISION_ARRAY_STAGE_2;
-      coinPosition = COIN_POSITION_STAGE_2;
-      if (COIN_INITILIZE === false) {
-        initilizeCoin();
-      }
-      groundEnemy = GROUND_ENEMY_STAGE_2;
-      spaceEnemy = SPACE_ENEMY_STAGE_2;
-      if (ENEMY_INITILIZE === false) {
-        initilizeEnemy();
-        ENEMY_INITILIZE = true;
-      }
-    } else if (STAGE === 3) {
-      STAGE = 3;
-      stageState[2] = "unlocked";
-      localStorage.setItem("stage", JSON.stringify(stageState));
-      getVaccantPosition(COLLISION_ARRAY_STAGE_3);
-      MAP = MAP_STAGE_3;
-      COLLISION_ARRAY = COLLISION_ARRAY_STAGE_3;
-      coinPosition = COIN_POSITION_STAGE_3;
-      if (COIN_INITILIZE === false) {
-        initilizeCoin();
-      }
-      groundEnemy = GROUND_ENEMY_STAGE_3;
-      spaceEnemy = SPACE_ENEMY_STAGE_3;
-      if (ENEMY_INITILIZE === false) {
-        initilizeEnemy();
-        ENEMY_INITILIZE = true;
-      }
-    }
-    generateAsset();
-
-    map.drawMap(tilesImg);
-    showStatusBar();
-    user.drawPlayer(characterImg);
-    collectCoins();
-    drawEnemy();
-    enemyPlayerCollision();
-    bulletEnemyCollision();
-    updateLife();
-    updateFuel();
-    updateHealth();
-    updateBullet();
-    user.isFalling();
-
-    coinArray.forEach((coin) => {
-      coin.drawCoin(coinImage);
-    });
-
-    lifeArray.forEach((life) => {
-      life.drawLife(lifeImage);
-    });
-
-    healthArray.forEach((health) => {
-      health.drawHealth(healthImage);
-    });
-
-    fuelArray.forEach((fuel) => {
-      fuel.drawFuel(fuelImage);
-    });
-
-    bulletArray.forEach((bullet) => {
-      bullet.drawBullet(bulletFireImage);
-      bullet.updateBullet();
-    });
+    handlePlayingState();
   } else if (gameOver === true) {
-    ctx.drawImage(
-      backgroundImg,
-      0,
-      0,
-      BACKGROUND_WIDTH,
-      BACKGROUND_HEIGHT,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-    ctx.drawImage(
-      logoImg,
-      0,
-      0,
-      LOGO_WIDTH,
-      LOGO_HEIGHT,
-      canvas.width / 2 - 100,
-      canvas.height / 2 - 125,
-      200,
-      50
-    );
-    for (let index = 0; index < 32; index++) {
-      ctx.drawImage(startImg, 436, 368, 100, 104, index * 30, 680, 30, 40);
-    }
-    ctx.drawImage(
-      startImg,
-      358,
-      180,
-      177,
-      154,
-      canvas.width / 2 - 150,
-      canvas.height / 2 + 20,
-      300,
-      300
-    );
-    ctx.font = "30px Ubuntu";
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
-    ctx.strokeText("GAME OVER !", 400, 460);
-    ctx.font = "15px Ubuntu";
-    ctx.strokeText(`SCORE : ${SCORE * 5}`, 450, 490);
-    ctx.strokeText(`BEST SCORE : ${BEST_SCORE}`, 430, 510);
-    ctx.strokeText("YES", 410, 590);
-    ctx.strokeText("NO", 530, 590);
-    ctx.font = "30px Ubuntu";
-    ctx.strokeText("PLAY AGAIN ?", 395, 560);
-    ctx.fill();
-
-    addEventListener("click", (e) => {
-      let rect = canvas.getBoundingClientRect();
-      let xPosition = e.clientX - rect.left;
-      let yPosition = e.clientY - rect.top;
-      if (detectMouseCollision(xPosition, yPosition, 15, 28, 410, 577)) {
-        reset();
-        gameOver = false;
-        play = true;
-      } else if (detectMouseCollision(xPosition, yPosition, 15, 28, 530, 577)) {
-        reset();
-        gameOver = false;
-        getReady = true;
-      }
-    });
+    handleGameOverState();
   }
 
   COIN_COUNT = coinArray.length;
@@ -470,6 +148,7 @@ function gameLoop() {
       playing = true;
     }
   }
+
   if (SCORE * 5 > BEST_SCORE) {
     localStorage.setItem("best", SCORE * 5);
     BEST_SCORE = localStorage.getItem("best");
@@ -500,7 +179,9 @@ function gameLoop() {
       10
     );
   }
+
   requestAnimationFrame(gameLoop);
+  
   if (playing === true) {
     now = Date.now();
     elapsed = now - then;
@@ -534,7 +215,351 @@ function gameLoop() {
   }
 }
 
+//function to handle get ready state
+
+function handleGetReadyState() {
+  ctx.drawImage(
+    backgroundImg,
+    0,
+    0,
+    BACKGROUND_WIDTH,
+    BACKGROUND_HEIGHT,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+  ctx.drawImage(
+    logoImg,
+    0,
+    0,
+    LOGO_WIDTH,
+    LOGO_HEIGHT,
+    canvas.width / 2 - 100,
+    canvas.height / 2 - 125,
+    200,
+    50
+  );
+  for (let index = 0; index < 32; index++) {
+    ctx.drawImage(startImg, 436, 368, 100, 104, index * 30, 680, 30, 40);
+  }
+  ctx.drawImage(startImg, 358, 180, 177, 154, 0, 530, 150, 150);
+  ctx.drawImage(
+    startImg,
+    0,
+    11,
+    146,
+    53,
+    canvas.width / 2 - 100,
+    canvas.height / 2 - 20,
+    200,
+    50
+  );
+  ctx.font = "12px Ubuntu";
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2;
+  ctx.strokeText("HOW TO PLAY?", 35, 570);
+  ctx.font = "9px Ubuntu";
+  ctx.lineWidth = 1;
+  ctx.strokeText("ARROW LEFT : LEFT", 35, 590);
+  ctx.strokeText("ARROW RIGHT : RIGHT", 30, 600);
+  ctx.strokeText("ARROW DOWN : DOWN", 30, 610);
+  ctx.strokeText("ARROW UP : CLIMB", 35, 620);
+  ctx.strokeText("SPACE : FLY", 60, 630);
+  ctx.strokeText("F : FIRE", 60, 640);
+  if (playAudio === false) {
+    ctx.drawImage(audioOFFImg, 0, 112, 980, 870, 0, 0, 30, 30);
+  } else if (playAudio === true) {
+    ctx.drawImage(audioONImg, 0, 0, 980, 870, 0, 0, 30, 30);
+  }
+  ctx.drawImage(startImg, 358, 180, 177, 154, 800, 530, 150, 150);
+  ctx.font = "15px Ubuntu";
+  ctx.lineWidth = 2;
+  ctx.strokeText(`BEST SCORE: ${BEST_SCORE}`, 825, 590);
+  ctx.fill();
+
+  addEventListener("click", (e) => {
+    let rect = canvas.getBoundingClientRect();
+    let xPosition = e.clientX - rect.left;
+    let yPosition = e.clientY - rect.top;
+    if (
+      detectMouseCollision(
+        xPosition,
+        yPosition,
+        200,
+        50,
+        canvas.width / 2 - 100,
+        canvas.height / 2 - 20
+      )
+    ) {
+      play = true;
+      getReady = false;
+    }
+    if (detectMouseCollision(xPosition, yPosition, 30, 30, 0, 0)) {
+      playAudio = !playAudio;
+    }
+  });
+}
+
+//function to handle play state
+
+function handlePlayState() {
+  ctx.drawImage(
+    backgroundImg,
+    0,
+    0,
+    BACKGROUND_WIDTH,
+    BACKGROUND_HEIGHT,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+  ctx.drawImage(
+    logoImg,
+    0,
+    0,
+    LOGO_WIDTH,
+    LOGO_HEIGHT,
+    canvas.width / 2 - 100,
+    canvas.height / 2 - 125,
+    200,
+    50
+  );
+  for (let index = 0; index < 32; index++) {
+    ctx.drawImage(startImg, 436, 368, 100, 104, index * 30, 680, 30, 40);
+  }
+  ctx.drawImage(startImg, 358, 180, 177, 154, 0, 530, 150, 150);
+
+  if (playAudio === false) {
+    ctx.drawImage(audioOFFImg, 0, 112, 980, 870, 0, 0, 30, 30);
+  } else if (playAudio === true) {
+    ctx.drawImage(audioONImg, 0, 0, 980, 870, 0, 0, 30, 30);
+  }
+  ctx.drawImage(cancelImg, 0, 0, 258, 258, 930, 0, 30, 30);
+  ctx.drawImage(startImg, 182, 0, 144, 162, 400, 530, 150, 150);
+  ctx.drawImage(startImg, 358, 180, 177, 154, 800, 530, 150, 150);
+  ctx.font = "25px Ubuntu";
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2;
+  ctx.strokeText("STAGE 1", 430, 570);
+  ctx.strokeText("STAGE 2", 430, 610);
+  ctx.strokeText("STAGE 3", 430, 650);
+  ctx.font = "12px Ubuntu";
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2;
+  ctx.strokeText("HOW TO PLAY?", 35, 570);
+  ctx.font = "9px Ubuntu";
+  ctx.lineWidth = 1;
+  ctx.strokeText("ARROW LEFT : LEFT", 35, 590);
+  ctx.strokeText("ARROW RIGHT : RIGHT", 30, 600);
+  ctx.strokeText("ARROW DOWN : DOWN", 30, 610);
+  ctx.strokeText("ARROW UP : CLIMB", 35, 620);
+  ctx.strokeText("SPACE : FLY", 60, 630);
+  ctx.strokeText("F : FIRE", 60, 640);
+  ctx.font = "15px Ubuntu";
+  ctx.lineWidth = 2;
+  ctx.strokeText(`BEST SCORE: ${BEST_SCORE}`, 825, 590);
+
+  if (stageState[1] === "locked") {
+    ctx.drawImage(levelLockedImg, 0, 0, 512, 512, 410, 590, 20, 20);
+  }
+  if (stageState[2] === "locked") {
+    ctx.drawImage(levelLockedImg, 0, 0, 512, 512, 410, 630, 20, 20);
+  }
+
+  addEventListener("click", (e) => {
+    let rect = canvas.getBoundingClientRect();
+    let xPosition = e.clientX - rect.left;
+    let yPosition = e.clientY - rect.top;
+    if (detectMouseCollision(xPosition, yPosition, 120, 40, 410, 542)) {
+      STAGE = 1;
+      play = false;
+      playing = true;
+    }
+    if (
+      detectMouseCollision(xPosition, yPosition, 120, 40, 410, 582) &&
+      stageState[1] === "unlocked"
+    ) {
+      STAGE = 2;
+      play = false;
+      playing = true;
+    }
+    if (
+      detectMouseCollision(xPosition, yPosition, 120, 40, 410, 622) &&
+      stageState[2] === "unlocked"
+    ) {
+      STAGE = 3;
+      play = false;
+      playing = true;
+    }
+    if (detectMouseCollision(xPosition, yPosition, 30, 30, 0, 0)) {
+      playAudio = !playAudio;
+    }
+    if (detectMouseCollision(xPosition, yPosition, 30, 30, 930, 0)) {
+      play = false;
+      getReady = true;
+    }
+  });
+}
+
+// function to handle playing state
+
+function handlePlayingState() {
+  COUNTER++;
+  if (STAGE === 1) {
+    STAGE = 1;
+    MAP = MAP_STAGE_1;
+    getVaccantPosition(COLLISION_ARRAY_STAGE_1);
+    COLLISION_ARRAY = COLLISION_ARRAY_STAGE_1;
+    coinPosition = COIN_POSITION_STAGE_1;
+    if (COIN_INITILIZE === false) {
+      initilizeCoin();
+    }
+    groundEnemy = GROUND_ENEMY_STAGE_1;
+    spaceEnemy = SPACE_ENEMY_STAGE_1;
+    if (ENEMY_INITILIZE === false) {
+      initilizeEnemy();
+    }
+  } else if (STAGE === 2) {
+    STAGE = 2;
+    stageState[1] = "unlocked";
+    localStorage.setItem("stage", JSON.stringify(stageState));
+    getVaccantPosition(COLLISION_ARRAY_STAGE_2);
+    MAP = MAP_STAGE_2;
+    COLLISION_ARRAY = COLLISION_ARRAY_STAGE_2;
+    coinPosition = COIN_POSITION_STAGE_2;
+    if (COIN_INITILIZE === false) {
+      initilizeCoin();
+    }
+    groundEnemy = GROUND_ENEMY_STAGE_2;
+    spaceEnemy = SPACE_ENEMY_STAGE_2;
+    if (ENEMY_INITILIZE === false) {
+      initilizeEnemy();
+      ENEMY_INITILIZE = true;
+    }
+  } else if (STAGE === 3) {
+    STAGE = 3;
+    stageState[2] = "unlocked";
+    localStorage.setItem("stage", JSON.stringify(stageState));
+    getVaccantPosition(COLLISION_ARRAY_STAGE_3);
+    MAP = MAP_STAGE_3;
+    COLLISION_ARRAY = COLLISION_ARRAY_STAGE_3;
+    coinPosition = COIN_POSITION_STAGE_3;
+    if (COIN_INITILIZE === false) {
+      initilizeCoin();
+    }
+    groundEnemy = GROUND_ENEMY_STAGE_3;
+    spaceEnemy = SPACE_ENEMY_STAGE_3;
+    if (ENEMY_INITILIZE === false) {
+      initilizeEnemy();
+      ENEMY_INITILIZE = true;
+    }
+  }
+
+  generateAsset();
+  map.drawMap(tilesImg);
+  showStatusBar();
+  user.drawPlayer(characterImg);
+  collectCoins();
+  drawEnemy();
+  enemyPlayerCollision();
+  bulletEnemyCollision();
+  updateLife();
+  updateFuel();
+  updateHealth();
+  updateBullet();
+  user.isFalling();
+
+  coinArray.forEach((coin) => {
+    coin.drawCoin(coinImage);
+  });
+  lifeArray.forEach((life) => {
+    life.drawLife(lifeImage);
+  });
+  healthArray.forEach((health) => {
+    health.drawHealth(healthImage);
+  });
+  fuelArray.forEach((fuel) => {
+    fuel.drawFuel(fuelImage);
+  });
+  bulletArray.forEach((bullet) => {
+    bullet.drawBullet(bulletFireImage);
+    bullet.updateBullet();
+  });
+}
+
+//function to handle game over state
+
+function handleGameOverState() {
+  ctx.drawImage(
+    backgroundImg,
+    0,
+    0,
+    BACKGROUND_WIDTH,
+    BACKGROUND_HEIGHT,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+  ctx.drawImage(
+    logoImg,
+    0,
+    0,
+    LOGO_WIDTH,
+    LOGO_HEIGHT,
+    canvas.width / 2 - 100,
+    canvas.height / 2 - 125,
+    200,
+    50
+  );
+  for (let index = 0; index < 32; index++) {
+    ctx.drawImage(startImg, 436, 368, 100, 104, index * 30, 680, 30, 40);
+  }
+  ctx.drawImage(
+    startImg,
+    358,
+    180,
+    177,
+    154,
+    canvas.width / 2 - 150,
+    canvas.height / 2 + 20,
+    300,
+    300
+  );
+  ctx.font = "30px Ubuntu";
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2;
+  ctx.strokeText("GAME OVER !", 400, 460);
+  ctx.font = "15px Ubuntu";
+  ctx.strokeText(`SCORE : ${SCORE * 5}`, 450, 490);
+  ctx.strokeText(`BEST SCORE : ${BEST_SCORE}`, 430, 510);
+  ctx.strokeText("YES", 410, 590);
+  ctx.strokeText("NO", 530, 590);
+  ctx.font = "30px Ubuntu";
+  ctx.strokeText("PLAY AGAIN ?", 395, 560);
+  ctx.fill();
+
+  addEventListener("click", (e) => {
+    let rect = canvas.getBoundingClientRect();
+    let xPosition = e.clientX - rect.left;
+    let yPosition = e.clientY - rect.top;
+    if (detectMouseCollision(xPosition, yPosition, 15, 28, 410, 577)) {
+      reset();
+      gameOver = false;
+      play = true;
+    } else if (detectMouseCollision(xPosition, yPosition, 15, 28, 530, 577)) {
+      reset();
+      gameOver = false;
+      getReady = true;
+    }
+  });
+}
+
+
 //function show the content of the status bar
+
 function showStatusBar() {
   healthStatus.drawStatusBar(HEALTH);
   fuelStatus.drawStatusBar(FUEL);
@@ -576,6 +601,7 @@ function showStatusBar() {
   } else if (playAudio === true) {
     ctx.drawImage(audioONImg, 0, 0, 980, 870, 0, 0, 30, 30);
   }
+
   addEventListener("click", (e) => {
     let rect = canvas.getBoundingClientRect();
     let xPosition = e.clientX - rect.left;
@@ -592,6 +618,7 @@ function showStatusBar() {
 }
 
 // function to draw enemy in the map from array containing enemy instances
+
 function drawEnemy() {
   for (let i = 0; i < groundEnemyArray.length; i++) {
     let enemy = groundEnemyArray[i];
@@ -606,6 +633,7 @@ function drawEnemy() {
 }
 
 // function to detect collision between enemy and player
+
 function enemyPlayerCollision() {
   let enemyArray = [...groundEnemyArray, ...spaceEnemyArray];
   for (let index = 0; index < enemyArray.length; index++) {
@@ -685,6 +713,7 @@ function bulletEnemyCollision() {
 }
 
 // function to collect coins
+
 function collectCoins() {
   for (let index = 0; index < coinArray.length; index++) {
     let coinX = coinArray[index].getLeft();
@@ -696,12 +725,14 @@ function collectCoins() {
     }
   }
 }
-function updateBullet(){
-  if (BULLET_COUNT < 3 && COUNTER % 2000 === 0){
+function updateBullet() {
+  if (BULLET_COUNT < 3 && COUNTER % 2000 === 0) {
     BULLET_COUNT += 1;
   }
 }
+
 //function to update life
+
 function updateLife() {
   for (let index = 0; index < lifeArray.length; index++) {
     let [left, top, ...rest] = lifeArray[index].getPosition();
@@ -724,6 +755,7 @@ function updateLife() {
 }
 
 // function to update fuel
+
 function updateFuel() {
   for (let index = 0; index < fuelArray.length; index++) {
     let [left, top, ...rest] = fuelArray[index].getPosition();
@@ -736,12 +768,13 @@ function updateFuel() {
       fuelArray.splice(index, 1);
     }
   }
-  if (FUEL < 100 && COUNTER % 500 === 0){
+  if (FUEL < 100 && COUNTER % 500 === 0) {
     FUEL += 2;
   }
 }
 
 // function to update health when user collects health or gets damage
+
 function updateHealth() {
   for (let index = 0; index < healthArray.length; index++) {
     let [left, top, ...rest] = healthArray[index].getPosition();
@@ -757,6 +790,7 @@ function updateHealth() {
 }
 
 // function to generate game assest like bullet, health, life, fuel in certain time interval
+
 function generateAsset() {
   if (COUNTER % 1200 === 0) {
     for (let index = 0; index < 1; index++) {
@@ -826,17 +860,21 @@ function generateAsset() {
       FUEL_DISPLAY_COUNT = 0;
     }
   }
-
 }
+
+//starting the game loop
+
+startGameLoop(8);
+
+
+//handaling the user control
 
 user.jumpPlayer();
 user.updatePlayer();
 
 
+//initilizing the coin
 
-startGameLoop(8);
-
-//INITILIZE COIN
 function initilizeCoin() {
   for (let index = 0; index < coinPosition.length; index++) {
     let xPosition = coinPosition[index].X * 30;
@@ -844,10 +882,12 @@ function initilizeCoin() {
     let coin = new Coin(COIN_HEIGHT, COIN_WIDTH, xPosition, yPosition);
     coinArray.push(coin);
   }
+
   COIN_INITILIZE = true;
 }
 
-//INILITIZE ENEMY
+//initilizing the enemy
+
 function initilizeEnemy() {
   for (let index = 0; index < groundEnemy.length; index++) {
     let xStart = groundEnemy[index].xStart;
