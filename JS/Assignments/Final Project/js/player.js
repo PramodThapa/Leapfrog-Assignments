@@ -1,6 +1,6 @@
 class Player {
   /**
-   * 
+   *
    * @param {*} height || height of the enemy in the spritesheet
    * @param {*} width || width of the player in spritesheet
    * @param {*} xPosition || yPosition of the enemy
@@ -49,7 +49,11 @@ class Player {
               this.moving = true;
               this.frameY = 3;
               this.yPosition += this.velocityY;
-              this.mapY = Math.floor(this.yPosition / TILES_HEIGHT);
+              if(COLLISION_ARRAY[this.mapY + 1][this.mapX +1] === 1 ){
+                this.mapY = Math.ceil(this.yPosition / TILES_HEIGHT);
+              }else{
+                this.mapY = Math.floor(this.yPosition / TILES_HEIGHT);
+              }
             } else {
               this.yPosition = this.mapY * 30;
             }
@@ -118,6 +122,11 @@ class Player {
     addEventListener("keydown", (e) => {
       keyPressed[e.key] = true;
       if (keyPressed[" "]) {
+        if (FUEL != 0) {
+          FUEL -= 2;
+        } else {
+          FUEL -= 0;
+        }
         if (
           COLLISION_ARRAY[this.mapY - 1][this.mapX] != 1 &&
           COLLISION_ARRAY[this.mapY - 1][this.mapX] != 2 &&
@@ -125,7 +134,6 @@ class Player {
         ) {
           this.jumping = true;
           this.yPosition -= 5;
-          FUEL -= 2;
           this.mapY = Math.floor(this.yPosition / TILES_HEIGHT);
         } else {
           this.yPosition = (this.mapY - 1) * TILES_HEIGHT + TILES_HEIGHT;

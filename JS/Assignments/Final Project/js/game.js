@@ -302,7 +302,9 @@ function gameLoop() {
   } else if (playing === true) {
     COUNTER++;
     if (STAGE === 1) {
+      STAGE = 1;
       MAP = MAP_STAGE_1;
+      getVaccantPosition(COLLISION_ARRAY_STAGE_1);
       COLLISION_ARRAY = COLLISION_ARRAY_STAGE_1;
       coinPosition = COIN_POSITION_STAGE_1;
       if (COIN_INITILIZE === false) {
@@ -313,10 +315,11 @@ function gameLoop() {
       if (ENEMY_INITILIZE === false) {
         initilizeEnemy();
       }
-      getVaccantPosition(COLLISION_ARRAY_STAGE_1);
     } else if (STAGE === 2) {
+      STAGE = 2;
       stageState[1] = "unlocked";
       localStorage.setItem("stage", JSON.stringify(stageState));
+      getVaccantPosition(COLLISION_ARRAY_STAGE_2);
       MAP = MAP_STAGE_2;
       COLLISION_ARRAY = COLLISION_ARRAY_STAGE_2;
       coinPosition = COIN_POSITION_STAGE_2;
@@ -329,10 +332,11 @@ function gameLoop() {
         initilizeEnemy();
         ENEMY_INITILIZE = true;
       }
-      getVaccantPosition(COLLISION_ARRAY_STAGE_2);
     } else if (STAGE === 3) {
+      STAGE = 3;
       stageState[2] = "unlocked";
       localStorage.setItem("stage", JSON.stringify(stageState));
+      getVaccantPosition(COLLISION_ARRAY_STAGE_3);
       MAP = MAP_STAGE_3;
       COLLISION_ARRAY = COLLISION_ARRAY_STAGE_3;
       coinPosition = COIN_POSITION_STAGE_3;
@@ -345,21 +349,20 @@ function gameLoop() {
         initilizeEnemy();
         ENEMY_INITILIZE = true;
       }
-      getVaccantPosition(COLLISION_ARRAY_STAGE_3);
     }
     generateAsset();
 
     map.drawMap(tilesImg);
     showStatusBar();
-
-    collectCoins();
     user.drawPlayer(characterImg);
+    collectCoins();
     drawEnemy();
     enemyPlayerCollision();
     bulletEnemyCollision();
     updateLife();
     updateFuel();
     updateHealth();
+    updateBullet();
     user.isFalling();
 
     coinArray.forEach((coin) => {
@@ -460,6 +463,7 @@ function gameLoop() {
     user.yPosition = 30;
     user.mapX = 1;
     user.mapY = 1;
+    BULLET_COUNT = 3;
     if (STAGE != 3) {
       STAGE++;
     } else {
@@ -497,7 +501,6 @@ function gameLoop() {
     );
   }
   requestAnimationFrame(gameLoop);
-
   if (playing === true) {
     now = Date.now();
     elapsed = now - then;
@@ -648,45 +651,38 @@ function bulletEnemyCollision() {
       }
     }
   }
+
+  for (let j = 0; j < bulletArray.length; j++) {
+    let bulletX = bulletArray[j].getX();
+    let bulletY = bulletArray[j].getY();
+    for (let i = 0; i < spaceEnemyArray.length; i++) {
+      let enemyX = spaceEnemyArray[i].getLeft();
+      let enemyY = spaceEnemyArray[i].getTop();
+
+      if (
+        bulletX > enemyX &&
+        bulletY === enemyY &&
+        user.playerDirection === "right"
+      ) {
+        spaceEnemyArray[i].health -= 10;
+        if (spaceEnemyArray[i].getHealth() <= 0) {
+          spaceEnemyArray.splice(i, 1);
+        } else {
+        }
+      } else if (
+        bulletX < enemyX &&
+        bulletY === enemyY &&
+        user.playerDirection === "left"
+      ) {
+        spaceEnemyArray[i].health -= 10;
+        if (spaceEnemyArray[i].getHealth() <= 0) {
+          spaceEnemyArray.splice(i, 1);
+        } else {
+        }
+      }
+    }
+  }
 }
-// function bulletEnemyCollision() {
-//   for (let i = 0; i < groundEnemyArray.length; i++) {
-//     let enemyX = groundEnemyArray[i].getLeft();
-//     let enemyY = groundEnemyArray[i].getTop();
-//     for (let j = 0; j < bulletArray.length; j++) {
-//       let bulletX = bulletArray[j].getX();
-//       let bulletY = bulletArray[j].getY();
-//       if (
-//         bulletX + 30 > enemyX &&
-//         bulletX < enemyX + 30 &&
-//         bulletY + 30 > enemyY &&
-//         bulletX < enemyY + 30
-//       ) {
-//         if (groundEnemyArray[i].getHealth() <= 0) {
-//           groundEnemyArray.splice(i, 1);
-//         } else {
-//           groundEnemyArray[i].setHealth(10);
-//         }
-//       }
-//     }
-//   }
-//   for (let i = 0; i < spaceEnemyArray.length; i++) {
-//     let enemyX = spaceEnemyArray[i].getLeft();
-//     let enemyY = spaceEnemyArray[i].getTop();
-//     for (let j = 0; j < bulletArray.length; j++) {
-//       let bulletX = bulletArray[j].getX();
-//       let bulletY = bulletArray[j].getY();
-//       if (
-//         bulletX + 30 > enemyX &&
-//         bulletX < enemyX + 30 &&
-//         bulletY + 30 > enemyY &&
-//         bulletX < enemyY + 30
-//       ) {
-//         spaceEnemyArray.splice(i, 1);
-//       }
-//     }
-//   }
-// }
 
 // function to collect coins
 function collectCoins() {
@@ -700,7 +696,11 @@ function collectCoins() {
     }
   }
 }
-
+function updateBullet(){
+  if (BULLET_COUNT < 3 && COUNTER % 2000 === 0){
+    BULLET_COUNT += 1;
+  }
+}
 //function to update life
 function updateLife() {
   for (let index = 0; index < lifeArray.length; index++) {
@@ -735,6 +735,9 @@ function updateFuel() {
       }
       fuelArray.splice(index, 1);
     }
+  }
+  if (FUEL < 100 && COUNTER % 500 === 0){
+    FUEL += 2;
   }
 }
 
@@ -823,10 +826,13 @@ function generateAsset() {
       FUEL_DISPLAY_COUNT = 0;
     }
   }
+
 }
 
 user.jumpPlayer();
 user.updatePlayer();
+
+
 
 startGameLoop(8);
 
