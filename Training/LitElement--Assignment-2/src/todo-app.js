@@ -72,17 +72,15 @@ export class Todo extends LitElement {
 
   deleteItem(indexToDelete) {
     this.list = this.list.filter((toDo, index) => index !== indexToDelete);
-
-    console.log(indexToDelete);
-    // this.list = this.list.splice(indexToDelete, 1);
   }
 
   markComplete(indexToMark) {
-    this.list[indexToMark].completed = !this.list[indexToMark].completed;
-    console.log(indexToMark)
-    console.log(this.list)
-    console.log(this.list[indexToMark].completed)
-
+    this.list = this.list.map((item, index) => {
+      if (index === indexToMark) {
+        item.completed = !item.completed;
+      }
+      return item;
+    });
   }
 
   render() {
