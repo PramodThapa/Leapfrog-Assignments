@@ -1,13 +1,18 @@
 import { LitElement, html, css } from 'lit';
 import './header-component';
+import './post-content';
+import './tag-component';
 export class PostComponent extends LitElement {
   static get styles() {
-    return [css`
-        .post-wrapper{
-            width:600px;
-            margin:30px auto 0px auto;
+    return [
+      css`
+        .post-wrapper {
+          width: 800px;
+          margin: 30px auto 0px auto;
+          box-shadow: 2px 2px 4px;
         }
-    `];
+      `,
+    ];
   }
   static get properties() {
     return {
@@ -19,11 +24,22 @@ export class PostComponent extends LitElement {
   }
 
   render() {
-    console.log(this.post);
     return html`
       <div class="post-wrapper">
-        <header-component></header-component>
-        <h3>${this.post.userName}</h3>
+        <header-component
+          .status=${this.post.status}
+          .userName=${this.post.userName}
+          .postedTime=${this.post.postedTime}
+          .answer=${this.post.answers}
+          .profileUrl=${this.post.profileUrl}
+          .viewerProfileUrl=${this.post.viewerProfileUrl}
+        ></header-component>
+        <post-content
+          .postTitle=${this.post.title}
+          .postContent=${this.post.content}
+        >
+        </post-content>
+        <tag-component .tags=${this.post.tags}> </tag-component>
       </div>
     `;
   }
