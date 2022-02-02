@@ -31,6 +31,23 @@ export class FilterText extends LitElement {
     ];
   }
 
+  /**
+   * get the proporties
+   *
+   * @type {Function}
+   *
+   * @returns {Object}
+   *
+   * dialogHeader || @type {String} Header of the dialog box
+   *
+   * label || @type {String} label of the search input box
+   *
+   * listData || @type {Array} list of the crossponding table column to filter
+   *
+   * filterListData || @type {Array}  filtered  list data of crosspnding column
+   *
+   * handleFilterSelect || @type {Array} callback function passed to the filter-dialog, execute when individual list is selected
+   */
   static get properties() {
     return {
       dialogHeader: { type: String },
@@ -41,17 +58,31 @@ export class FilterText extends LitElement {
     };
   }
 
+  /**
+   * constructor function
+   */
   constructor() {
     super();
     this.listData = [];
     this.filterListData = [];
   }
 
+  /**
+   * life cycle method
+   *
+   * set filterlist data to to orginal list data
+   */
   connectedCallback() {
     super.connectedCallback();
     this.filterListData = this.listData;
   }
 
+  /**
+   *
+   * @param {*} e || event
+   *
+   * sets filterListData crossponding to the input given to search field
+   */
   filterList(e) {
     let filteredData = [];
 
@@ -61,11 +92,13 @@ export class FilterText extends LitElement {
       }
     });
     this.filterListData = [...filteredData];
-
-    console.log(this.filterListData);
   }
- 
- 
+
+  /**
+   * 
+   * @returns html to render
+   */
+
   render() {
     return html` <h3>${this.dialogHeader}</h3>
       <paper-input @input=${(e) => this.filterList(e)} label="${this.label}">
@@ -73,7 +106,10 @@ export class FilterText extends LitElement {
       <paper-listbox class="dropdown-content">
         ${this.filterListData.map(
           (item) =>
-            html`<paper-button id=${item} @click=${(e) => this.handleFilterSelect(e)} noink
+            html`<paper-button
+              id=${item}
+              @click=${(e) => this.handleFilterSelect(e)}
+              noink
               >${item}</paper-button
             >`
         )}
@@ -81,4 +117,7 @@ export class FilterText extends LitElement {
   }
 }
 
+/**
+ * Register the component as filter-dialog
+ */
 customElements.define('filter-dialog', FilterText);

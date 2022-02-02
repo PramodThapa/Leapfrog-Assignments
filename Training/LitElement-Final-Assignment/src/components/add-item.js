@@ -83,12 +83,27 @@ export class AddItem extends LitElement {
     ];
   }
 
+  /**
+   * get proporties of the component
+   * @type {Function}
+   *
+   * @returns {Object}
+   *
+   * target || @type {Array} target dropdown array
+   *
+   * addItem || @type {Function} callback function passed from app component to add the data to the table
+   *
+   */
   static get properties() {
     return {
       target: { type: Array },
       addItem: { type: Function },
     };
   }
+
+  /**
+   * constructor function
+   */
   constructor() {
     super();
     this.project = project;
@@ -97,6 +112,10 @@ export class AddItem extends LitElement {
     this.openDialog = this.openDialog.bind(this);
   }
 
+  /**
+   * @type {Function}
+   * Opens the add item dialog
+   */
   openDialog() {
     this.shadowRoot.querySelector('#add-item').open();
     this.shadowRoot
@@ -105,17 +124,32 @@ export class AddItem extends LitElement {
       .close();
   }
 
+  /**
+   * @type {Function}
+   * Close the add item dialog
+   */
   closeDialog() {
     this.shadowRoot.querySelector('#add-item').close();
     this.close = true;
   }
 
+  /**
+   * @type {Function}
+   * Update the target dropdown array crossponding to the project selected
+   */
   handleValueChange() {
     this.shadowRoot.querySelector('#target').value = null;
     let project = this.shadowRoot.querySelector('#project').value;
     this.target = this.projectTarget[project];
   }
 
+  /**
+   * @type {Function}
+   *
+   * Perform the form validation
+   *
+   * If validation is true execute the add item funciton that adds the data to the table
+   */
   handleAddButtonClick() {
     let validated = true;
     let synthesisRequest = {};
@@ -182,6 +216,12 @@ export class AddItem extends LitElement {
     }
   }
 
+  /**
+   *
+   * @param {*} e || event
+   *
+   * handles the confirm dialog box
+   */
   handleConfirmDialog(e) {
     this.shadowRoot
       .querySelector('#confirm-dialog')
@@ -189,6 +229,11 @@ export class AddItem extends LitElement {
       .open();
   }
 
+  /**
+   * @type {Function}
+   *
+   * @returns html to render
+   */
   render() {
     console.log();
     return html`
@@ -359,4 +404,7 @@ export class AddItem extends LitElement {
   }
 }
 
+/**
+ * Register add item component as add-item
+ */
 customElements.define('add-item', AddItem);

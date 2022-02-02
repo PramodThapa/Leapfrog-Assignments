@@ -30,11 +30,19 @@ export class ConfirmDialog extends LitElement {
     ];
   }
 
+  /**
+   * get proporties of confirm-dialog
+   * handleCancel || @type {Function} @returns {} function executed when cancel button clicked in dialog component 
+   */
   static get properties() {
     return {
         handleCancel : {type:Function}
     };
   }
+
+  /**
+   * constructor function
+   */
   constructor() {
     super();
   }

@@ -45,7 +45,17 @@ export class FilterItem extends LitElement {
       `,
     ];
   }
-
+  /**
+   * get proporties
+   *
+   * @type {Function}
+   *
+   * @returns {Object}
+   *
+   * filterDetail ||  @type {Object} filter detail accoring to with filter need to be applied in table
+   *
+   * cancelFilter || @type {Function} @returns {} cancel the selected filter
+   */
   static get properties() {
     return {
       filterDetail: { type: Object },
@@ -53,10 +63,17 @@ export class FilterItem extends LitElement {
     };
   }
 
+  /**
+   * constructor function
+   */
   constructor() {
     super();
   }
 
+  /**
+   *
+   * @returns html to render
+   */
   render() {
     return html`
       <div class="wrapper">
@@ -65,7 +82,7 @@ export class FilterItem extends LitElement {
           (item) =>
             html`<div class="filter-container">
               <div>${item[1]}</div>
-              <paper-icon-button-light  @click =${(e)=>this.cancelFilter(e)}>
+              <paper-icon-button-light @click=${(e) => this.cancelFilter(e)}>
                 <button>
                   <iron-icon id=${item[0]} icon="close"></iron-icon>
                 </button>
@@ -77,4 +94,7 @@ export class FilterItem extends LitElement {
   }
 }
 
+/**
+ * Register component as filter-item
+ */
 customElements.define('filter-item', FilterItem);

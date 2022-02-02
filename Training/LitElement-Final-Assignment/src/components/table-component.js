@@ -20,6 +20,11 @@ import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/paper-icon-button/paper-icon-button-light.js';
 
 export class TableComponent extends LitElement {
+   /**
+   * Gets style.
+   *
+   * @returns {Array}
+   */
   static get styles() {
     return [
       css`
@@ -79,6 +84,9 @@ export class TableComponent extends LitElement {
     ];
   }
 
+  /**
+   * Constructor Function
+   */
   constructor() {
     super();
     this.status = {};
@@ -89,11 +97,23 @@ export class TableComponent extends LitElement {
     this.dataToEdit = '';
   }
 
+  /**
+   * Proporties of table component
+   * 
+   * tableData || @type {Array} Data of of the table row
+   * 
+   * filteredAttribute || @type {Array} Filter attribute used in the table data
+   * 
+   * index || @type {String} index of the each row in table
+   * 
+   * filteredData || @type {Array} Filtered data in the table row
+   * 
+   * dataToEdit || @type {Object} Data to edit ,  table row data
+    */
   static get properties() {
     return {
       tableData: { type: Array },
       filterAttribute: { type: Array },
-      onFilterDialogChange: { type: Function },
       index: { type: String },
       filteredData: { type: Array },
       dataToEdit: { type: Object },
@@ -110,14 +130,27 @@ export class TableComponent extends LitElement {
     this.filterAttribute = Object.assign({}, this.filterAttribute);
   }
 
+  /**
+   * Opens the filter dialog
+   */
+
   openDialog() {
     this.querySelector('#filter-dialog').open();
   }
+
+  /**
+   * Opens the edit dialog
+   */
 
   openEditDialog() {
     this.querySelector('#edit-dialog').open();
   }
 
+  /**
+   * 
+   * @param {*} e || event
+   * @param {*} index || index of the selected table row to edit
+   */
   handlEditDialog(e, index) {
     e.target.ownerDocument.body
       .querySelector('#app')
@@ -130,12 +163,38 @@ export class TableComponent extends LitElement {
     this.dataToEdit = this.filteredData[index];
   }
 
+  /**
+   * 
+   * @param {*} editedData || edited data of the table row of selected index
+   * edit the table row
+   */
+  editTableRow(editedData) {
+    this.tableData = this.tableData.map((item, index) => {
+      if (index === this.index) {
+        return editedData;
+      }
+      return item;
+    });
+  }
+
+  /**
+   * 
+   * @param {*} e|| event
+   *  
+   */
   onCancelFilter(e) {
     let filter = e.target.id;
     let { [filter]: removedFilter, ...restFilter } = this.filterAttribute;
     this.filterAttribute = restFilter;
   }
 
+  /**
+   * 
+   * @param {*} root || root 
+   * @param {*} column || column 
+   * @param {*} data || table row data
+   * render the edit button on the table row
+   */
   editButtonRenderer(root, column, data) {
     const innerHTML = html`
       <paper-icon-button-light @click=${this.openEditDialog}>
@@ -153,6 +212,11 @@ export class TableComponent extends LitElement {
     render(innerHTML, root);
   }
 
+  /**
+   * 
+   * @param {*} status || status of the table row
+   * @returns {Object} || returns object containing css  maped with status to style the dot icon
+   */
   getStatusClassMapDot(status) {
     return {
       bgYellow: status === 'Queued',
@@ -161,6 +225,11 @@ export class TableComponent extends LitElement {
     };
   }
 
+   /**
+   * 
+   * @param {*} status || status of the table row
+   * @returns {Object} || returns object containing css  maped with status to style text in status field
+   */
   getStatusClassMapText(status) {
     return {
       queued: status === 'Queued',
@@ -169,6 +238,14 @@ export class TableComponent extends LitElement {
     };
   }
 
+  /**
+   * 
+   * @param {*} root || root
+   * @param {*} column || column
+   * @param {*} data || row data
+   * 
+   * render the status with crossponding styling
+   */
   statusRender(root, column, data) {
     this.status = data.item.status;
     const innerHTML = html`
@@ -184,12 +261,27 @@ export class TableComponent extends LitElement {
     render(innerHTML, root);
   }
 
+  /**
+   * 
+   * @param {*} root || root
+   * @param {*} column || column
+   * @param {*} data || data
+   * 
+   * render the table ID field data in table row
+   */
   requestIDRenderer(root, column, data) {
     const innerHTML = html`
       <div><a href="https://www.google.com/">${data.item.requestID}</a></div>
     `;
     render(innerHTML, root);
   }
+
+  /**
+   * 
+   * @param {*} root || root
+   * @param {*} column || column
+   * render the request ID header with filter icon and crossponding components
+   */
 
   requestIDHeaderRenderer(root, column) {
     const innerHTML = html`
@@ -216,6 +308,12 @@ export class TableComponent extends LitElement {
     render(innerHTML, root);
   }
 
+  /**
+   * 
+   * @param {*} root || root
+   * @param {*} column || column
+   * render the project header with filter icon and crossponding components
+   */
   projectHeaderRenderer(root, column) {
     const innerHTML = html`
       <div class="header-wrapper">
@@ -241,6 +339,10 @@ export class TableComponent extends LitElement {
     render(innerHTML, root);
   }
 
+  /**
+   * 
+   * @returns html to render 
+   */
   render() {
     if (Object.entries(this.filterAttribute).length === 0) {
       this.filteredData = [...this.tableData];
@@ -329,10 +431,14 @@ export class TableComponent extends LitElement {
       <edit-item
         .indexValue=${this.index}
         .data=${this.dataToEdit}
+        .updateTableRow=${this.editTableRow}
         id="edit"
       ></edit-item>
     `;
   }
 }
 
+/**
+ * register table component as table-component
+ */
 customElements.define('table-component', TableComponent);

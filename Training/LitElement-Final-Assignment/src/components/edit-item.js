@@ -83,13 +83,34 @@ export class EditItem extends LitElement {
     ];
   }
 
+  /**
+   * get proporties of the edit-item component
+   * 
+   * @returns {Object}
+   * 
+   * target || @type {Array} array to the controlled dropdown (target)
+   * 
+   * indexValue || @type {String} index of the table row to edit
+   * 
+   * data || @type {Object} data of the entire row with index passed as proporties
+   * 
+   * udateTableRow || @type {Function} callback function passed to edit-item component form table-component to get updated data
+   * 
+   * @type {Function}
+   * 
+   */
   static get properties() {
     return {
       target: { type: Array },
       indexValue: { type: String },
       data: { type: Object },
+      updateTableRow: { type: Function },
     };
   }
+
+  /**
+   * constructor funtion 
+   */
   constructor() {
     super();
     this.indexValue = '';
@@ -97,13 +118,27 @@ export class EditItem extends LitElement {
     this.target = [];
   }
 
+  /**
+   * open the edit dialog
+   */
   openDialog() {
     this.shadowRoot.querySelector('#edit-item').open();
   }
+
+  /**
+   * close the edit dialog
+   */
   closeDialog() {
     this.shadowRoot.querySelector('#edit-item').close();
   }
 
+  /**
+   * Execute with edit button is clicked
+   * 
+   * validates each field in the form
+   * 
+   * If form validation is true execute updateTableRow function
+   */
   handleEditButtonClick() {
     let validated = true;
     let synthesisRequest = {};
@@ -164,10 +199,14 @@ export class EditItem extends LitElement {
     }
 
     if (validated === true) {
-      console.log(synthesisRequest);
+      this.updateTableRow(synthesisRequest);
     }
   }
 
+  /**
+   * @type {Function}
+   * changed the target dropdown array crossponding to the project dropdown item selected
+   */
   handleValueChange() {
     this.shadowRoot.querySelector('#target').value = null;
     let project = this.shadowRoot.querySelector('#project').value;
@@ -353,4 +392,7 @@ export class EditItem extends LitElement {
   }
 }
 
+/***
+ * Register the edit item component as edit-item
+ */
 customElements.define('edit-item', EditItem);
